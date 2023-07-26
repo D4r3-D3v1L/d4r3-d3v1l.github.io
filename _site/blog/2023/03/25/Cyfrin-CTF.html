@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cyfrin Security Challenge WriteUp </title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Cyfrin Security Challenge WriteUp ">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2023/03/25/Cyfrin-CTF.html">
+  <meta property="og:title" content="Cyfrin Security Challenge WriteUp ">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Cyfrin Security Challenge WriteUp "/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Cyfrin Security Challenge WriteUp </a></h1>
+          <h4 class="post-title"> 2023-03-25 07:38:12 +0530 </h4>
+<article class="blog-post">
+  <p>Cyfrin Security Challenge</p>
+
+<!--more-->
+
+<p>I came across this <a href="https://twitter.com/CyfrinAudits/status/1638649541049319424">Tweet</a> after a day and decided to give a try.</p>
+
+<p>This is the contract address on arbitrum https://arbiscan.io/address/0x884ec45eb8f0cde4f101157ce4597e74fe6dc7bd .</p>
+
+<p>Contract Code :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="mf">0.8</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="s">"../abstractContracts/ACyfrinSecurityChallengeContract.sol"</span><span class="p">;</span>
+<span class="k">import</span> <span class="s">"../interfaces/ICyfrinSecurityChallenges.sol"</span><span class="p">;</span>
+
+<span class="n">error</span> <span class="n">HellSpawnFunc__TransferFailed</span><span class="p">();</span>
+
+<span class="k">contract</span> <span class="n">HellSpawnFuncCaller</span> <span class="k">is</span> <span class="n">ACyfrinSecurityChallengeContract</span> <span class="p">{</span>
+   <span class="n">HellSpawnFunc</span> <span class="k">private</span> <span class="n">s_hellfSpawnFunc</span><span class="p">;</span>
+
+   <span class="k">constructor</span><span class="p">(</span><span class="kt">address</span> <span class="n">cscNft</span><span class="p">)</span> <span class="n">ACyfrinSecurityChallengeContract</span><span class="p">(</span><span class="n">cscNft</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">s_hellfSpawnFunc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HellSpawnFunc</span><span class="p">();</span>
+   <span class="p">}</span>
+
+   <span class="k">function</span> <span class="n">description</span><span class="p">()</span> <span class="k">external</span> <span class="k">pure</span> <span class="k">override</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span> <span class="k">memory</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span>
+           <span class="s">"Oof, that's a lot of conditionals! Hope you didn't do it manually ;)"</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">function</span> <span class="n">callHellFunc</span><span class="p">(</span><span class="kt">uint128</span> <span class="n">numbor</span><span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+       <span class="k">try</span> <span class="n">s_hellfSpawnFunc</span><span class="p">.</span><span class="n">hellFunc</span><span class="p">(</span><span class="n">numbor</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+           <span class="c1">// Do nothing
+</span>       <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+           <span class="n">_updateAndRewardSolver</span><span class="p">();</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+
+   <span class="k">function</span> <span class="n">getHellSpawnFuncAddress</span><span class="p">()</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">address</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="kt">address</span><span class="p">(</span><span class="n">s_hellfSpawnFunc</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Int</span> <span class="k">is</span> <span class="kt">uint256</span><span class="p">;</span>
+<span class="k">using</span> <span class="p">{</span><span class="n">add</span> <span class="k">as</span> <span class="o">-</span><span class="p">}</span> <span class="k">for</span> <span class="n">Int</span> <span class="n">global</span><span class="p">;</span>
+<span class="k">using</span> <span class="p">{</span><span class="n">div</span> <span class="k">as</span> <span class="o">+</span><span class="p">}</span> <span class="k">for</span> <span class="n">Int</span> <span class="n">global</span><span class="p">;</span>
+<span class="k">using</span> <span class="p">{</span><span class="n">mul</span> <span class="k">as</span> <span class="o">/</span><span class="p">}</span> <span class="k">for</span> <span class="n">Int</span> <span class="n">global</span><span class="p">;</span>
+<span class="k">using</span> <span class="p">{</span><span class="n">sub</span> <span class="k">as</span> <span class="o">*</span><span class="p">}</span> <span class="k">for</span> <span class="n">Int</span> <span class="n">global</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="n">add</span><span class="p">(</span><span class="n">Int</span> <span class="n">a</span><span class="p">,</span> <span class="n">Int</span> <span class="n">b</span><span class="p">)</span>  <span class="k">pure</span> <span class="k">returns</span><span class="p">(</span><span class="n">Int</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">div</span><span class="p">(</span><span class="n">Int</span> <span class="n">a</span><span class="p">,</span> <span class="n">Int</span> <span class="n">b</span><span class="p">)</span>  <span class="k">pure</span> <span class="k">returns</span><span class="p">(</span><span class="n">Int</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">mul</span><span class="p">(</span><span class="n">Int</span> <span class="n">a</span><span class="p">,</span> <span class="n">Int</span> <span class="n">b</span><span class="p">)</span>  <span class="k">pure</span> <span class="k">returns</span><span class="p">(</span><span class="n">Int</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">sub</span><span class="p">(</span><span class="n">Int</span> <span class="n">a</span><span class="p">,</span> <span class="n">Int</span> <span class="n">b</span><span class="p">)</span> <span class="k">pure</span> <span class="k">returns</span><span class="p">(</span><span class="n">Int</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">contract</span> <span class="n">HellSpawnFunc</span> <span class="p">{</span>
+   <span class="kt">uint256</span> <span class="n">numbr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+   <span class="kt">uint256</span> <span class="n">namber</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+   <span class="kt">uint256</span> <span class="n">nunber</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+   <span class="kt">uint256</span> <span class="n">mumber</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+   <span class="kt">uint256</span> <span class="n">numbor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+   <span class="kt">uint256</span> <span class="n">numbir</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+   <span class="kt">address</span> <span class="n">owner</span><span class="p">;</span>
+
+   <span class="k">constructor</span><span class="p">(){</span>
+       <span class="n">owner</span> <span class="o">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">sender</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+   <span class="k">modifier</span> <span class="n">onlyOwner</span><span class="p">()</span> <span class="p">{</span>
+       <span class="nb">require</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">,</span> <span class="s">"Only owner can call this function."</span><span class="p">);</span>
+       <span class="n">_</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">function</span> <span class="n">hellFunc</span><span class="p">(</span><span class="kt">uint128</span> <span class="n">numberr</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="n">onlyOwner</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+       <span class="kt">uint256</span> <span class="n">numberrr</span> <span class="o">=</span> <span class="kt">uint256</span><span class="p">(</span><span class="n">numberr</span><span class="p">);</span>
+       <span class="n">Int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">numberrr</span><span class="p">);</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">number</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">numbr</span><span class="p">)</span> <span class="o">-</span> <span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">number</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">3</span><span class="p">)));</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">numbr</span><span class="p">))))))))))</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="mi">1654</span><span class="p">;</span>
+           <span class="p">}</span>
+           <span class="k">return</span> <span class="mi">5</span> <span class="o">-</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+       <span class="p">}</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+           <span class="n">_numbaar</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">));</span>
+           <span class="kt">uint256</span> <span class="n">dog</span> <span class="o">=</span> <span class="n">_numbaar</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="mi">50</span><span class="p">);</span>
+           <span class="k">return</span> <span class="p">(</span><span class="n">dog</span> <span class="o">+</span> <span class="n">numbr</span> <span class="o">-</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">/</span> <span class="n">numbir</span><span class="p">)</span> <span class="o">*</span> <span class="n">numbor</span><span class="p">)</span> <span class="o">-</span> <span class="n">numbir</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">number</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">number</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">154</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">)</span> <span class="p">{</span>
+                       <span class="k">return</span> <span class="p">(</span><span class="mi">76</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="n">numbr</span><span class="p">)))))))))))))</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="kt">uint256</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+                   <span class="p">}</span>
+               <span class="p">}</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">95</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">%</span> <span class="mi">99</span><span class="p">))</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+               <span class="p">}</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">88</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">%</span> <span class="mi">99</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+               <span class="p">}</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="mi">19</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+               <span class="p">}</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="n">numbr</span> <span class="o">-</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">nunber</span><span class="p">)</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">7654</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">95</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">%</span> <span class="mi">99</span><span class="p">))</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+               <span class="p">}</span><span class="mi">100000</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1200000</span><span class="p">)</span> <span class="p">{</span>
+                       <span class="k">return</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+                   <span class="p">}</span>
+               <span class="p">}</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">)</span> <span class="p">{</span>
+                       <span class="k">return</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">number</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+                   <span class="p">}</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">((</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">number</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="o">+</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">number</span> <span class="o">*</span> <span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+           <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">numbr</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+           <span class="p">}</span>
+           <span class="k">return</span> <span class="p">(</span><span class="mi">236</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span> <span class="o">/</span> <span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">Int</span><span class="p">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">number</span><span class="p">)))))));</span>
+       <span class="p">}</span>
+       <span class="k">return</span> <span class="n">numbr</span> <span class="o">+</span> <span class="n">nunber</span> <span class="o">-</span> <span class="n">mumber</span> <span class="o">-</span> <span class="n">mumber</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">function</span> <span class="n">_numbaar</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">cat</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">cat</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="n">numbir</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">return</span> <span class="n">mumber</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="k">return</span> <span class="n">cat</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>if you see clearly there is a <code class="language-plaintext highlighter-rouge">_updateAndRewardSolver</code> function which solves the challenge and mints NFT.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function callHellFunc(uint128 numbor) external {
+        try s_hellfSpawnFunc.hellFunc(numbor) returns (uint256) {
+            // Do nothing
+        } catch {
+            _updateAndRewardSolver();
+        }
+    }
+</code></pre></div></div>
+
+<p>We need to go to catch block to call this function.</p>
+
+<p>After looking the <code class="language-plaintext highlighter-rouge">hellFunc</code> and Int Type the calculation symbols and logic is interchanged.</p>
+
+<ul>
+  <li>For - -&gt; /</li>
+  <li>For * -&gt; +</li>
+  <li>For + -&gt; *</li>
+  <li>For / -&gt; -</li>
+</ul>
+
+<p>I was tracking the function where i can make the return type as negative number .</p>
+
+<p>Other if blocks except this are too Straight forward <code class="language-plaintext highlighter-rouge">if (Int.unwrap(number) &gt; 1) </code> , the first inner if block won’t return a negative number .</p>
+
+<p>if you see the second inner if block</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (Int.unwrap(number) &gt; 95)
+{
+      return Int.unwrap(Int.wrap((Int.unwrap(number) % 99)) / Int.wrap(1));
+}
+
+</code></pre></div></div>
+
+<p>If we pass 99 then it will be negative as 99%99 will be 0 and <code class="language-plaintext highlighter-rouge">/</code> -&gt; <code class="language-plaintext highlighter-rouge">-</code> so 0 - 1 = -1 .</p>
+
+<p><code class="language-plaintext highlighter-rouge">We also achieve this by bruteforce from 2 to 100</code></p>
+
+<p>Solution code :</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT
+</span><span class="k">pragma</span> <span class="n">solidity</span> <span class="mf">0.8</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="k">interface</span> <span class="n">IHellSpawnFuncCaller</span> <span class="p">{</span>
+    <span class="k">function</span> <span class="n">callHellFunc</span><span class="p">(</span><span class="kt">uint128</span> <span class="n">numbor</span><span class="p">)</span> <span class="k">external</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">contract</span> <span class="n">CallHellFunc</span> <span class="p">{</span>
+    <span class="kt">address</span> <span class="k">public</span> <span class="k">constant</span> <span class="n">hellSpawnFuncCallerAddress</span> <span class="o">=</span> <span class="mh">0x884ec45eb8F0cdE4f101157Ce4597e74fE6dc7Bd</span><span class="p">;</span>
+
+    <span class="k">function</span> <span class="n">callHellFunc</span><span class="p">(</span><span class="kt">uint128</span> <span class="n">numbor</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="n">IHellSpawnFuncCaller</span><span class="p">(</span><span class="n">hellSpawnFuncCallerAddress</span><span class="p">).</span><span class="n">callHellFunc</span><span class="p">(</span><span class="n">numbor</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Or directly pass the 99 into the contract in https://arbiscan.io/address/0x884ec45eb8f0cde4f101157ce4597e74fe6dc7bd#writeContract</p>
+
+<p><img src="https://user-images.githubusercontent.com/47492561/227746882-8c4dfb97-d648-490f-bbca-276e9d13a430.png" alt="Screenshot from 2023-03-26 04-45-58" /></p>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>

