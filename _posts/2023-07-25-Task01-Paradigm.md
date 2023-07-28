@@ -4,7 +4,7 @@ title: "Paradigm CTF WriteUps [Task - 01]"
 date: 2023-07-25 09:07:16
 categories: blog
 ---
-
+Hi guys, I recently applied to a junior auditor role in a Blockchain Security company, I gonna share the insights I gained and tasks given by the team.
 This is the first task,Where I need to solve some of the challenges in Paradigm CTF 2022.
 
 <!--more-->
