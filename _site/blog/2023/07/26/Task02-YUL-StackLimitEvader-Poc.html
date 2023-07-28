@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Understanding YUL Optimization Passes [Task - 02,03]</title>
+  <meta name="description" content="Building n Breaking">
+
+  <!-- Social: Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@D4r3_D3v1L_">
+  <meta name="twitter:title" content="Understanding YUL Optimization Passes [Task - 02,03]">
+  <meta name="twitter:description" content="Building n Breaking">
+  
+  <meta property="twitter:image:src" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+
+  <!-- Social: Facebook / Open Graph -->
+  <meta property="og:url" content="http://localhost:4000/potato-hacker-theme/blog/2023/07/26/Task02-YUL-StackLimitEvader-Poc.html">
+  <meta property="og:title" content="Understanding YUL Optimization Passes [Task - 02,03]">
+  
+  <meta property="og:image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png">
+  
+  <meta property="og:description" content="Building n Breaking">
+  <meta property="og:site_name" content="jekyll-theme-potato-hacker">
+
+  <!-- Social: Schema.org  -->
+  <meta itemprop="name" content="Understanding YUL Optimization Passes [Task - 02,03]"/>
+  <meta itemprop="description" content="Building n Breaking">
+  <meta itemprop="image" content="http://localhost:4000/potato-hacker-theme/assets/img/opengraph.png"/>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/potato-hacker-theme/assets/img/icons/favicon.ico" type="image/x-icon" />
+
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#2a4d14">
+
+  <!-- Styles -->
+  <link rel="stylesheet" id="css-theme" href="/potato-hacker-theme/assets/css/main-dark.css">
+  <link rel="stylesheet" href="/potato-hacker-theme/assets/css/highlight/gruvbox.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+  <script type="text/javascript" src="/potato-hacker-theme/assets/js/main.js"></script>
+</head>
+
+
+<body class="animated fadeIn">
+  <div class="container">
+    <div id="background-div">
+      <svg id="background-svg">
+        <lineargradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-opacity="0" class="bgColor2" offset="0%" />
+          <stop stop-opacity="0.5" class="bgColor2" offset="10%" />
+          <stop stop-opacity="0.5" class="bgColor1" offset="40%" />
+          <stop stop-opacity="0" class="bgColor1" offset="100%" />
+        </lineargradient>
+        <g id="bg-layer1"></g>
+        <g id="bg-layer2" class="hide"></g>
+        <g id="bg-layer3"></g>
+        <g id="bg-layer4"></g>
+      </svg>
+    </div>
+    <section class="header">
+      <header>
+	<div class="row">
+		<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a
+							class="navbar-toggle collapsed navbar-icon"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1"
+						>
+							<i class="fa fa-bars fa-2x"></i>
+						</a>
+						<a
+							class="navbar-brand navbar-icon"
+							href="/potato-hacker-theme/"
+						>
+							<i class="fa fa-home fa-2x"></i>
+						</a>
+					</div>
+
+					<div
+						class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1"
+					>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/potato-hacker-theme/"
+									>Home</a
+								>
+							</li>
+							
+							<li>
+								<a href="/potato-hacker-theme/blog"
+									>Blog</a
+								>
+							</li>
+							
+
+							<!-- 
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority="1"><a href="/potato-hacker-theme/dropdown/dropdown1_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority="2"><a href="/potato-hacker-theme/dropdown/dropdown1_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown1">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown1
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item3">
+                    <li priority="3"><a href="/potato-hacker-theme/dropdown/dropdown1_item3.html">item3</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item1.html">item1</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown2">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown2
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item2">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown2_item2.html">item2</a></li>
+                  </ul>
+                </li>
+              
+                <li class="dropdown dropdown-dropdown3">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">dropdown3
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-item1">
+                    <li priority=""><a href="/potato-hacker-theme/dropdown/dropdown3_item1.html">item1</a></li>
+                  </ul>
+                </li>
+               -->
+							
+							<li class="nav-item">
+								<a
+									href="/potato-hacker-theme/items/about.html"
+									>About</a
+								>
+							</li>
+							
+
+							<script>
+								// clean repeated dropdowns and add <li> to their positions
+								let done = [];
+								let elements = [];
+								$(".dropdown")
+								  //
+								  .each((index0 , value0) => {
+								    let dropdownClass = "."+$(value0)[0].classList[1];
+								    if (done.indexOf(dropdownClass) !== -1) return
+								    done.push(dropdownClass)
+								    let dropdownMain = $(dropdownClass)[0]
+								    let itemsList = $(dropdownClass+">ul>li").sort((a, b) => parseInt(b.getAttribute("priority") || -9999999) - parseInt(a.getAttribute("priority") || -9999999))
+								    $(dropdownClass+">ul>li").remove();
+								    $(dropdownClass+">ul").append(itemsList)
+								    $(dropdownClass).remove();
+								    elements.push(dropdownMain)
+								});
+								let priority = [ "About", ];
+								elements = elements.concat(...$(".nav-item").remove())
+								priority.map(text => {
+								  elements = elements.filter(node => {
+								      let nodeText = node.querySelector("a").textContent.trim()
+								      if (text == nodeText) {
+								          $(".nav").append(node)
+								          return false;
+								      }
+								      return true;
+								  })
+								});
+								$(".nav").append(elements)
+							</script>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</header>
+
+    </section>
+    <section class="content">
+      <div class="row">
+        <!-- <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="left-pane">
+          </div>
+        </div> -->
+        <div class="col-sm-8 col-sm-offset-2 content-div">
+          <div class="page-separator hidden-xs">
+            <h1 class="h1-strip" style="padding-bottom:8em; margin-bottom: 0;"></h1>
+          </div>
+          <div class="page-separator visible-xs">
+            <h1 class="h1-strip" style="padding-bottom:2em; margin-bottom: 0;"></h1>
+          </div>
+          <h1 class="post-title page-title" id="title"><a href="#title">Understanding YUL Optimization Passes [Task - 02,03]</a></h1>
+          <h4 class="post-title"> 2023-07-26 13:37:34 +0530 </h4>
+<article class="blog-post">
+  <p>This is the second task which consists of YUL language , Optimization Passes and memory-safe assembly in solidity.</p>
+
+<!--more-->
+
+<p>After the First task , the recruiter gave me a week to learn YUL language which is intermediate language for EVM.</p>
+
+<p>I have refered these resources <a href="https://calnix.gitbook.io/eth-dev/yul/yul">YUL basics </a>,<a href="https://docs.soliditylang.org/en/latest/yul.html">YUL Documentation</a> .</p>
+
+<p>After one week , He asked me about <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> and how it works.</p>
+
+<h3 id="stacklimitevader-">StackLimitEvader ?</h3>
+
+<p>StackLimitEvader is a low-level optimization pass used in Yul to prevent <code class="language-plaintext highlighter-rouge">stack-too-deep</code> errors. These errors occur when there are too many variables on the stack at once.</p>
+
+<p>However, this transformation is only enabled in the absence of inline assembly for now, since there is no way to indicate that inline assembly will respect Solidity’s memory model, which is a prerequisite for the transformation to be valid.</p>
+
+<p>To enable the StackLimitEvader, Yul code needs to indicate that it respects an area of reserved memory. This can be done with the <a href="https://docs.soliditylang.org/en/latest/yul.html?#memoryguard"><strong>memoryguard</strong></a> function.</p>
+
+<p>If you want to skip the code flow of How StackLimitEvader pass works Please click here <a href="#example">Example</a></p>
+
+<h3 id="how-the-stacklimitevader-pass-work">How the StackLimitEvader pass work.</h3>
+
+<p><a href="https://github.com/ethereum/solidity/blob/29751849b58a7db5eec3f297087544ae9531f0df/libyul/optimiser/StackLimitEvader.cpp">code</a></p>
+
+<p><img src="https://file.notion.so/f/s/e294a517-c867-47c1-87b7-702addc6b695/Untitled.png?id=fa89efdb-8e6f-4cb3-9584-f7fe1dce360e&amp;table=block&amp;spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&amp;expirationTimestamp=1690588800000&amp;signature=7H5-vyw6SrLu-mJvHD_Bz6rwiBq-No_OIjDKPvzRGJ4&amp;downloadName=Untitled.png" alt="Flow" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Suite.cpp</code> file which executes various optimization steps, including the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> technique. The <code class="language-plaintext highlighter-rouge">StackLimitEvader::run</code> function is called, which in turn calls two other <code class="language-plaintext highlighter-rouge">run</code> functions in the <code class="language-plaintext highlighter-rouge">StackLimitEvader.cpp</code> file.</p>
+
+<p><strong>Suite.cpp → calls StackLimitEvader(<em>context,</em>object) → Move the Stack to Memory.</strong></p>
+
+<p>Here’s how the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> pass is called:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Run the user-supplied clean up sequence</span>
+	<span class="n">suite</span><span class="p">.</span><span class="n">runSequence</span><span class="p">(</span><span class="n">_optimisationCleanupSequence</span><span class="p">,</span> <span class="n">ast</span><span class="p">);</span>
+	<span class="c1">// Hard-coded FunctionGrouper step is used to bring the AST into a canonical form required by the StackCompressor</span>
+	<span class="c1">// and StackLimitEvader. This is hard-coded as the last step, as some previously executed steps may break the</span>
+	<span class="c1">// aforementioned form, thus causing the StackCompressor/StackLimitEvader to throw.</span>
+	<span class="n">suite</span><span class="p">.</span><span class="n">runSequence</span><span class="p">(</span><span class="s">"g"</span><span class="p">,</span> <span class="n">ast</span><span class="p">);</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">evmDialect</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">yulAssert</span><span class="p">(</span><span class="n">_meter</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+		<span class="n">ConstantOptimiser</span><span class="p">{</span><span class="o">*</span><span class="n">evmDialect</span><span class="p">,</span> <span class="o">*</span><span class="n">_meter</span><span class="p">}(</span><span class="n">ast</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">usesOptimizedCodeGenerator</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">StackCompressor</span><span class="o">::</span><span class="n">run</span><span class="p">(</span>
+				<span class="n">_dialect</span><span class="p">,</span>
+				<span class="n">_object</span><span class="p">,</span>
+				<span class="n">_optimizeStackAllocation</span><span class="p">,</span>
+				<span class="n">stackCompressorMaxIterations</span>
+			<span class="p">);</span>
+			<span class="o">**</span><span class="k">if</span> <span class="p">(</span><span class="n">evmDialect</span><span class="o">-&gt;</span><span class="n">providesObjectAccess</span><span class="p">())</span>
+				<span class="n">StackLimitEvader</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">.</span><span class="n">m_context</span><span class="p">,</span> <span class="n">_object</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">evmDialect</span><span class="o">-&gt;</span><span class="n">providesObjectAccess</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">_optimizeStackAllocation</span><span class="p">)</span>
+			<span class="n">StackLimitEvader</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">.</span><span class="n">m_context</span><span class="p">,</span> <span class="n">_object</span><span class="p">);</span><span class="o">**</span>
+	<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this Suite.cpp If the EVM dialect is set (i.e., the target platform is EVM) some checks and If the <code class="language-plaintext highlighter-rouge">usesOptimizedCodeGenerator</code> flag is set, the <code class="language-plaintext highlighter-rouge">StackCompressor</code> is applied to optimize the use of the stack in the Yul code. If the EVM dialect supports object access (i.e., the <code class="language-plaintext highlighter-rouge">providesObjectAccess</code>() function returns true), the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> it takes the <code class="language-plaintext highlighter-rouge">m_context</code> object and the <code class="language-plaintext highlighter-rouge">Object</code> object as arguments. The <code class="language-plaintext highlighter-rouge">m_context</code> object provides the context in which the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> pass will run, while the <code class="language-plaintext highlighter-rouge">Object</code> object represents the Yul code that has been optimized by previous optimization passes.</p>
+
+<p><code class="language-plaintext highlighter-rouge">StackLimitEvader.cpp :</code></p>
+
+<p>Here’s the entry point to the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> pass:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">StackLimitEvader</span><span class="o">::</span><span class="n">run</span><span class="p">(</span>
+	<span class="n">OptimiserStepContext</span><span class="o">&amp;</span> <span class="n">_context</span><span class="p">,</span>
+	<span class="n">Object</span><span class="o">&amp;</span> <span class="n">_object</span>
+<span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">auto</span> <span class="k">const</span><span class="o">*</span> <span class="n">evmDialect</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">EVMDialect</span> <span class="k">const</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">_context</span><span class="p">.</span><span class="n">dialect</span><span class="p">);</span>
+	<span class="n">yulAssert</span><span class="p">(</span>
+		<span class="n">evmDialect</span> <span class="o">&amp;&amp;</span> <span class="n">evmDialect</span><span class="o">-&gt;</span><span class="n">providesObjectAccess</span><span class="p">(),</span>
+		<span class="s">"StackLimitEvader can only be run on objects using the EVMDialect with object access."</span>
+	<span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">evmDialect</span> <span class="o">&amp;&amp;</span> <span class="n">evmDialect</span><span class="o">-&gt;</span><span class="n">evmVersion</span><span class="p">().</span><span class="n">canOverchargeGasForCall</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="n">yul</span><span class="o">::</span><span class="n">AsmAnalysisInfo</span> <span class="n">analysisInfo</span> <span class="o">=</span> <span class="n">yul</span><span class="o">::</span><span class="n">AsmAnalyzer</span><span class="o">::</span><span class="n">analyzeStrictAssertCorrect</span><span class="p">(</span><span class="o">*</span><span class="n">evmDialect</span><span class="p">,</span> <span class="n">_object</span><span class="p">);</span>
+		<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">CFG</span><span class="o">&gt;</span> <span class="n">cfg</span> <span class="o">=</span> <span class="n">ControlFlowGraphBuilder</span><span class="o">::</span><span class="n">build</span><span class="p">(</span><span class="n">analysisInfo</span><span class="p">,</span> <span class="o">*</span><span class="n">evmDialect</span><span class="p">,</span> <span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">);</span>
+		<span class="n">run</span><span class="p">(</span><span class="n">_context</span><span class="p">,</span> <span class="n">_object</span><span class="p">,</span> <span class="n">StackLayoutGenerator</span><span class="o">::</span><span class="n">reportStackTooDeep</span><span class="p">(</span><span class="o">*</span><span class="n">cfg</span><span class="p">));</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+		<span class="n">run</span><span class="p">(</span><span class="n">_context</span><span class="p">,</span> <span class="n">_object</span><span class="p">,</span> <span class="n">CompilabilityChecker</span><span class="p">{</span>
+			<span class="n">_context</span><span class="p">.</span><span class="n">dialect</span><span class="p">,</span>
+			<span class="n">_object</span><span class="p">,</span>
+			<span class="nb">true</span>
+		<span class="p">}.</span><span class="n">unreachableVariables</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>It checks if the input object uses the EVMDialect with object access, and if the EVM version used in the dialect supports overcharging gas for call instructions.</p>
+
+<p>If both conditions are satisfied :</p>
+
+<ul>
+  <li>It calls the 2nd run method with the same context , object and <code class="language-plaintext highlighter-rouge">StackLayoutGenerator::reportStackTooDeep(\*cfg)</code></li>
+  <li>reportStackTooDeep :
+this method takes a Control Flow Graph (<code class="language-plaintext highlighter-rouge">CFG</code>) object as input and returns a map of Yul function names to a vector of <code class="language-plaintext highlighter-rouge">StackToDeep</code> objects. Each <code class="language-plaintext highlighter-rouge">StackToDeep</code> object represents a point in the function where the stack depth exceeds the maximum allowed depth</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">This will call the 2nd run method :</code></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">StackLimitEvader</span><span class="o">::</span><span class="n">run</span><span class="p">(</span>
+	<span class="n">OptimiserStepContext</span><span class="o">&amp;</span> <span class="n">_context</span><span class="p">,</span>
+	<span class="n">Object</span><span class="o">&amp;</span> <span class="n">_object</span><span class="p">,</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">StackLayoutGenerator</span><span class="o">::</span><span class="n">StackTooDeep</span><span class="o">&gt;&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">_stackTooDeepErrors</span>
+<span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">YulString</span><span class="o">&gt;&gt;</span> <span class="n">unreachableVariables</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">function</span><span class="p">,</span> <span class="n">stackTooDeepErrors</span><span class="p">]</span><span class="o">:</span> <span class="n">_stackTooDeepErrors</span><span class="p">)</span>
+		<span class="c1">// TODO: choose wisely.</span>
+		<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">stackTooDeepError</span><span class="o">:</span> <span class="n">stackTooDeepErrors</span><span class="p">)</span>
+			<span class="n">unreachableVariables</span><span class="p">[</span><span class="n">function</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stackTooDeepError</span><span class="p">.</span><span class="n">variableChoices</span> <span class="o">|</span> <span class="n">ranges</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">take</span><span class="p">(</span><span class="n">stackTooDeepError</span><span class="p">.</span><span class="n">deficit</span><span class="p">)</span> <span class="o">|</span> <span class="n">ranges</span><span class="o">::</span><span class="n">to</span><span class="o">&lt;</span><span class="n">set</span><span class="o">&lt;</span><span class="n">YulString</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+	<span class="n">run</span><span class="p">(</span><span class="n">_context</span><span class="p">,</span> <span class="n">_object</span><span class="p">,</span> <span class="n">unreachableVariables</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This code is adding to the <code class="language-plaintext highlighter-rouge">unreachableVariables</code> map the set of variables that are unreachable due to the stack being too deep. The set of variables to add is determined based on the <code class="language-plaintext highlighter-rouge">variableChoices</code> set of each <code class="language-plaintext highlighter-rouge">StackTooDeep</code> object in the <code class="language-plaintext highlighter-rouge">\_stackTooDeepErrors</code> map</p>
+
+<p>and then calls <code class="language-plaintext highlighter-rouge">3rd run method.</code></p>
+
+<p>Else block :</p>
+
+<ul>
+  <li>It calls the 3rd run method with the same context , object and <code class="language-plaintext highlighter-rouge">CompilabilityChecker{\_context.dialect,\_object,true}.unreachableVariables.</code> which is used to identify the unreachable variables.</li>
+  <li>CompilabilityChecker :
+The CompilabilityChecker takes the dialect, object, and a boolean parameter as input. The boolean parameter specifies whether to run a simulation of the execution of the program or not. If it is set to true, the CompilabilityChecker will run the simulation and compute which parts of the code are unreachable.
+The <code class="language-plaintext highlighter-rouge">unreachableVariables</code> member function of the CompilabilityChecker returns a map that associates each function name with a set of unreachable variable names. These variable names represent the local variables that are never accessed in the function because the corresponding code paths are unreachable. This information is used by the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> to modify the Yul code and remove these unused variables from the stack.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">3rd run method</code></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">StackLimitEvader</span><span class="o">::</span><span class="n">run</span><span class="p">(</span>
+	<span class="n">OptimiserStepContext</span><span class="o">&amp;</span> <span class="n">_context</span><span class="p">,</span>
+	<span class="n">Object</span><span class="o">&amp;</span> <span class="n">_object</span><span class="p">,</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">YulString</span><span class="o">&gt;&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">_unreachableVariables</span>
+<span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">yulAssert</span><span class="p">(</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+	<span class="k">auto</span> <span class="k">const</span><span class="o">*</span> <span class="n">evmDialect</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">EVMDialect</span> <span class="k">const</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">_context</span><span class="p">.</span><span class="n">dialect</span><span class="p">);</span>
+	<span class="n">yulAssert</span><span class="p">(</span>
+		<span class="n">evmDialect</span> <span class="o">&amp;&amp;</span> <span class="n">evmDialect</span><span class="o">-&gt;</span><span class="n">providesObjectAccess</span><span class="p">(),</span>
+		<span class="s">"StackLimitEvader can only be run on objects using the EVMDialect with object access."</span>
+	<span class="p">);</span>
+
+	<span class="n">vector</span><span class="o">&lt;</span><span class="n">FunctionCall</span><span class="o">*&gt;</span> <span class="n">memoryGuardCalls</span> <span class="o">=</span> <span class="n">FunctionCallFinder</span><span class="o">::</span><span class="n">run</span><span class="p">(</span>
+		<span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">,</span>
+		<span class="s">"memoryguard"</span><span class="n">_yulstring</span>
+	<span class="p">);</span>
+	<span class="c1">// Do not optimise, if no ``memoryguard`` call is found.</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">memoryGuardCalls</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+		<span class="k">return</span><span class="p">;</span>
+
+	<span class="c1">// Make sure all calls to ``memoryguard`` we found have the same value as argument (otherwise, abort).</span>
+	<span class="n">u256</span> <span class="n">reservedMemory</span> <span class="o">=</span> <span class="n">literalArgumentValue</span><span class="p">(</span><span class="o">*</span><span class="n">memoryGuardCalls</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+	<span class="n">yulAssert</span><span class="p">(</span><span class="n">reservedMemory</span> <span class="o">&lt;</span> <span class="n">u256</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">FunctionCall</span> <span class="k">const</span><span class="o">*</span> <span class="n">memoryGuardCall</span><span class="o">:</span> <span class="n">memoryGuardCalls</span><span class="p">)</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">reservedMemory</span> <span class="o">!=</span> <span class="n">literalArgumentValue</span><span class="p">(</span><span class="o">*</span><span class="n">memoryGuardCall</span><span class="p">))</span>
+			<span class="k">return</span><span class="p">;</span>
+
+	<span class="n">CallGraph</span> <span class="n">callGraph</span> <span class="o">=</span> <span class="n">CallGraphGenerator</span><span class="o">::</span><span class="n">callGraph</span><span class="p">(</span><span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">);</span>
+
+	<span class="c1">// We cannot move variables in recursive functions to fixed memory offsets.</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">YulString</span> <span class="n">function</span><span class="o">:</span> <span class="n">callGraph</span><span class="p">.</span><span class="n">recursiveFunctions</span><span class="p">())</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">_unreachableVariables</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">function</span><span class="p">))</span>
+			<span class="k">return</span><span class="p">;</span>
+
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">FunctionDefinition</span> <span class="k">const</span><span class="o">*&gt;</span> <span class="n">functionDefinitions</span> <span class="o">=</span> <span class="n">allFunctionDefinitions</span><span class="p">(</span><span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">);</span>
+
+	<span class="n">MemoryOffsetAllocator</span> <span class="n">memoryOffsetAllocator</span><span class="p">{</span><span class="n">_unreachableVariables</span><span class="p">,</span> <span class="n">callGraph</span><span class="p">.</span><span class="n">functionCalls</span><span class="p">,</span> <span class="n">functionDefinitions</span><span class="p">};</span>
+	<span class="kt">uint64_t</span> <span class="n">requiredSlots</span> <span class="o">=</span> <span class="n">memoryOffsetAllocator</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+	<span class="n">yulAssert</span><span class="p">(</span><span class="n">requiredSlots</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+
+	<span class="n">StackToMemoryMover</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">_context</span><span class="p">,</span> <span class="n">reservedMemory</span><span class="p">,</span> <span class="n">memoryOffsetAllocator</span><span class="p">.</span><span class="n">slotAllocations</span><span class="p">,</span> <span class="n">requiredSlots</span><span class="p">,</span> <span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">);</span>
+
+	<span class="n">reservedMemory</span> <span class="o">+=</span> <span class="mi">32</span> <span class="o">*</span> <span class="n">requiredSlots</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">FunctionCall</span><span class="o">*</span> <span class="n">memoryGuardCall</span><span class="o">:</span> <span class="n">FunctionCallFinder</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">_object</span><span class="p">.</span><span class="n">code</span><span class="p">,</span> <span class="s">"memoryguard"</span><span class="n">_yulstring</span><span class="p">))</span>
+	<span class="p">{</span>
+		<span class="n">Literal</span><span class="o">*</span> <span class="n">literal</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">get_if</span><span class="o">&lt;</span><span class="n">Literal</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">memoryGuardCall</span><span class="o">-&gt;</span><span class="n">arguments</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+		<span class="n">yulAssert</span><span class="p">(</span><span class="n">literal</span> <span class="o">&amp;&amp;</span> <span class="n">literal</span><span class="o">-&gt;</span><span class="n">kind</span> <span class="o">==</span> <span class="n">LiteralKind</span><span class="o">::</span><span class="n">Number</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+		<span class="n">literal</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">YulString</span><span class="p">{</span><span class="n">toCompactHexWithPrefix</span><span class="p">(</span><span class="n">reservedMemory</span><span class="p">)};</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Inputs : OptimiserStepContext, an Object, and a map of unreachablevariables</p>
+
+<p>This is the main logic of the code ,lets break down :</p>
+
+<ul>
+  <li>First there are 2 assertions regarding object.code and providesObjectAccess .</li>
+  <li>It then finds all <code class="language-plaintext highlighter-rouge">memoryguard</code> function calls in the Yul code and if there is no memoryguard calls it returns.</li>
+  <li>If there are <code class="language-plaintext highlighter-rouge">memoryguard</code> calls, it checks that all calls use the same value as an argument and not more than 2^32 - 1</li>
+  <li>It then constructs a call graph of the Yul code and checks that there are no recursive functions that have unreachable variables</li>
+  <li>
+    <p>Then we create the <code class="language-plaintext highlighter-rouge">MemoryOffsetAllocator</code> with the context,functioncalls and functiondefinitions.</p>
+
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">MemoryOffsetAllocator</span>
+<span class="p">{</span>
+	<span class="kt">uint64_t</span> <span class="n">run</span><span class="p">(</span><span class="n">YulString</span> <span class="n">_function</span> <span class="o">=</span> <span class="n">YulString</span><span class="p">{})</span>
+	<span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">slotsRequiredForFunction</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">_function</span><span class="p">))</span>
+			<span class="k">return</span> <span class="n">slotsRequiredForFunction</span><span class="p">[</span><span class="n">_function</span><span class="p">];</span>
+
+		<span class="c1">// Assign to zero early to guard against recursive calls.</span>
+		<span class="n">slotsRequiredForFunction</span><span class="p">[</span><span class="n">_function</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+		<span class="kt">uint64_t</span> <span class="n">requiredSlots</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">callGraph</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">_function</span><span class="p">))</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">YulString</span> <span class="n">child</span><span class="o">:</span> <span class="n">callGraph</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">_function</span><span class="p">))</span>
+				<span class="n">requiredSlots</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">run</span><span class="p">(</span><span class="n">child</span><span class="p">),</span> <span class="n">requiredSlots</span><span class="p">);</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">*</span> <span class="n">unreachables</span> <span class="o">=</span> <span class="n">util</span><span class="o">::</span><span class="n">valueOrNullptr</span><span class="p">(</span><span class="n">unreachableVariables</span><span class="p">,</span> <span class="n">_function</span><span class="p">))</span>
+		<span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">FunctionDefinition</span> <span class="k">const</span><span class="o">*</span> <span class="n">functionDefinition</span> <span class="o">=</span> <span class="n">util</span><span class="o">::</span><span class="n">valueOrDefault</span><span class="p">(</span><span class="n">functionDefinitions</span><span class="p">,</span> <span class="n">_function</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">util</span><span class="o">::</span><span class="n">allow_copy</span><span class="p">))</span>
+				<span class="k">if</span> <span class="p">(</span>
+					<span class="kt">size_t</span> <span class="n">totalArgCount</span> <span class="o">=</span> <span class="n">functionDefinition</span><span class="o">-&gt;</span><span class="n">returnVariables</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">functionDefinition</span><span class="o">-&gt;</span><span class="n">parameters</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+					<span class="n">totalArgCount</span> <span class="o">&gt;</span> <span class="mi">16</span>
+				<span class="p">)</span>
+					<span class="k">for</span> <span class="p">(</span><span class="n">TypedName</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">var</span><span class="o">:</span> <span class="n">ranges</span><span class="o">::</span><span class="n">concat_view</span><span class="p">(</span>
+						<span class="n">functionDefinition</span><span class="o">-&gt;</span><span class="n">parameters</span><span class="p">,</span>
+						<span class="n">functionDefinition</span><span class="o">-&gt;</span><span class="n">returnVariables</span>
+					<span class="p">)</span> <span class="o">|</span> <span class="n">ranges</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">take</span><span class="p">(</span><span class="n">totalArgCount</span> <span class="o">-</span> <span class="mi">16</span><span class="p">))</span>
+						<span class="n">slotAllocations</span><span class="p">[</span><span class="n">var</span><span class="p">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">requiredSlots</span><span class="o">++</span><span class="p">;</span>
+
+			<span class="c1">// Assign slots for all variables that become unreachable in the function body, if the above did not</span>
+			<span class="c1">// assign a slot for them already.</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">YulString</span> <span class="n">variable</span><span class="o">:</span> <span class="o">*</span><span class="n">unreachables</span><span class="p">)</span>
+				<span class="c1">// The empty case is a function with too many arguments or return values,</span>
+				<span class="c1">// which was already handled above.</span>
+				<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">variable</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">slotAllocations</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">variable</span><span class="p">))</span>
+					<span class="n">slotAllocations</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">requiredSlots</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="k">return</span> <span class="n">slotsRequiredForFunction</span><span class="p">[</span><span class="n">_function</span><span class="p">]</span> <span class="o">=</span> <span class="n">requiredSlots</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">/// Maps function names to the set of unreachable variables in that function.</span>
+	<span class="c1">/// An empty variable name means that the function has too many arguments or return variables.</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">YulString</span><span class="o">&gt;&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">unreachableVariables</span><span class="p">;</span>
+	<span class="c1">/// The graph of immediate function calls of all functions.</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">YulString</span><span class="o">&gt;&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">callGraph</span><span class="p">;</span>
+	<span class="c1">/// Maps the name of each user-defined function to its definition.</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="n">FunctionDefinition</span> <span class="k">const</span><span class="o">*&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">functionDefinitions</span><span class="p">;</span>
+
+	<span class="c1">/// Maps variable names to the memory slot the respective variable is assigned.</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="kt">uint64_t</span><span class="o">&gt;</span> <span class="n">slotAllocations</span><span class="p">{};</span>
+	<span class="c1">/// Maps function names to the number of memory slots the respective function requires.</span>
+	<span class="n">map</span><span class="o">&lt;</span><span class="n">YulString</span><span class="p">,</span> <span class="kt">uint64_t</span><span class="o">&gt;</span> <span class="n">slotsRequiredForFunction</span><span class="p">{};</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+  <li>This structs also implements a <code class="language-plaintext highlighter-rouge">run</code> method which rerturns the number of memory slots required by each Yul function
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">unreachableVariables</code> : A map that maps function names to the set of unreachable variables in those functions.</li>
+      <li><code class="language-plaintext highlighter-rouge">callGraph</code> : A map that represents the call graph of the contract, mapping each function name to the set of functions that it calls directly.</li>
+      <li><code class="language-plaintext highlighter-rouge">functionDefinitions</code> : A map that maps function names to their definitions.</li>
+      <li><code class="language-plaintext highlighter-rouge">slotAllocations</code> : A map that maps variable names to the memory slot the respective variable is assigned.</li>
+      <li><code class="language-plaintext highlighter-rouge">slotsRequiredForFunction</code> : A map that maps function names to the number of memory slots the respective function requires.</li>
+    </ul>
+  </li>
+  <li>First checks if the number of required memory slots for the given function is already known by checking if the function name is present in the <code class="language-plaintext highlighter-rouge">slotsRequiredForFunction</code> map. If the number of required slots is already known, the method simply returns the value from the map.</li>
+  <li>If the number of required slots is not known, the method calculates it recursively by traversing the call graph of the function and computing the maximum number of slots required by any of its child functions.</li>
+  <li>it then retrieve the value of the <code class="language-plaintext highlighter-rouge">unreachableVariables</code> map corresponding to the key <code class="language-plaintext highlighter-rouge">_function</code>. If the key exists in the map, the function will return a pointer to its value. If the key does not exist, the function will return a null pointer.</li>
+  <li>if the total number of arguments and return variables is greater than 16, then some of them need to be stored on the stack .</li>
+</ul>
+
+<p>Finally returns the <code class="language-plaintext highlighter-rouge">requiredSlots .</code></p>
+
+<ul>
+  <li>The function then calls <code class="language-plaintext highlighter-rouge">run</code> in <code class="language-plaintext highlighter-rouge">StackToMemoryMover</code> , <code class="language-plaintext highlighter-rouge">which moves all stack variables to memory based on the offsets</code> generated by the <code class="language-plaintext highlighter-rouge">MemoryOffsetAllocator .</code></li>
+  <li>It then updates the <code class="language-plaintext highlighter-rouge">memoryguard</code> function call with the new value of reserved memory</li>
+</ul>
+
+<h3 id="example">Example</h3>
+
+<p><code class="language-plaintext highlighter-rouge">function_args.yul</code></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="p">{</span>
+        <span class="nx">mstore</span><span class="p">(</span><span class="mh">0x40</span><span class="p">,</span> <span class="nx">memoryguard</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+        <span class="nx">sstore</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">a1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">v</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="na">a2</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a3</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a4</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a5</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a6</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a7</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a8</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a9</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a10</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a11</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a12</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a13</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a14</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a15</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a16</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="kd">let</span> <span class="na">a17</span> <span class="p">:</span><span class="o">=</span> <span class="nx">calldataload</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">a1</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a17</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a16</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a15</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a14</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a13</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a12</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a11</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a10</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a9</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a8</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a7</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a6</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a5</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a4</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a3</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a2</span><span class="p">)</span>
+	<span class="nx">sstore</span><span class="p">(</span><span class="nx">mul</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="nx">a1</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p><strong>Without optimization</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>solc <span class="nt">--strict-assembly</span> function_args.yul
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Uncaught exception:
+/solidity/libyul/backends/evm/EVMObjectCompiler.cpp<span class="o">(</span>126<span class="o">)</span>: Throw <span class="k">in function </span>void solidity::yul::EVMObjectCompiler::run<span class="o">(</span>solidity::yul::Object&amp;, bool<span class="o">)</span>
+Dynamic exception <span class="nb">type</span>: boost::wrapexcept&lt;solidity::yul::StackTooDeepError&gt;
+std::exception::what: <span class="k">**</span>Variable a1 is 2 slot<span class="o">(</span>s<span class="o">)</span> too deep inside the stack. Stack too deep.<span class="k">**</span> Try compiling with <span class="sb">`</span><span class="nt">--via-ir</span><span class="sb">`</span> <span class="o">(</span>cli<span class="o">)</span> or the equivalent <span class="sb">`</span>viaIR: <span class="nb">true</span><span class="sb">`</span> <span class="o">(</span>standard JSON<span class="o">)</span> <span class="k">while </span>enabling the optimizer. Otherwise, try removing <span class="nb">local </span>variables.
+<span class="o">[</span>solidity::util::tag_comment<span class="k">*</span><span class="o">]</span> <span class="o">=</span> Variable a1 is 2 slot<span class="o">(</span>s<span class="o">)</span> too deep inside the stack. Stack too deep. Try compiling with <span class="sb">`</span><span class="nt">--via-ir</span><span class="sb">`</span> <span class="o">(</span>cli<span class="o">)</span> or the equivalent <span class="sb">`</span>viaIR: <span class="nb">true</span><span class="sb">`</span> <span class="o">(</span>standard JSON<span class="o">)</span> <span class="k">while </span>enabling the optimizer. Otherwise, try removing <span class="nb">local </span>variables.
+</code></pre></div></div>
+
+<p><strong>using –optimizer will use the StackLimitEvader and give us the optimized code.</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>solc <span class="nt">--strict-assembly</span> <span class="nt">--optimize</span> function_args.yul
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object <span class="s2">"object"</span> <span class="o">{</span>
+    code <span class="o">{</span>
+        <span class="o">{</span>
+            sstore<span class="o">(</span>68, calldataload<span class="o">(</span>68<span class="o">))</span>
+            sstore<span class="o">(</span>0x40, calldataload<span class="o">(</span>0x40<span class="o">))</span>
+            sstore<span class="o">(</span>60, calldataload<span class="o">(</span>60<span class="o">))</span>
+            sstore<span class="o">(</span>56, calldataload<span class="o">(</span>56<span class="o">))</span>
+            sstore<span class="o">(</span>52, calldataload<span class="o">(</span>52<span class="o">))</span>
+            sstore<span class="o">(</span>48, calldataload<span class="o">(</span>48<span class="o">))</span>
+            sstore<span class="o">(</span>44, calldataload<span class="o">(</span>44<span class="o">))</span>
+            sstore<span class="o">(</span>40, calldataload<span class="o">(</span>40<span class="o">))</span>
+            sstore<span class="o">(</span>36, calldataload<span class="o">(</span>36<span class="o">))</span>
+            sstore<span class="o">(</span>32, calldataload<span class="o">(</span>32<span class="o">))</span>
+            sstore<span class="o">(</span>28, calldataload<span class="o">(</span>28<span class="o">))</span>
+            sstore<span class="o">(</span>24, calldataload<span class="o">(</span>24<span class="o">))</span>
+            sstore<span class="o">(</span>20, calldataload<span class="o">(</span>20<span class="o">))</span>
+            sstore<span class="o">(</span>16, calldataload<span class="o">(</span>16<span class="o">))</span>
+            sstore<span class="o">(</span>12, calldataload<span class="o">(</span>12<span class="o">))</span>
+            sstore<span class="o">(</span>8, calldataload<span class="o">(</span>8<span class="o">))</span>
+            sstore<span class="o">(</span>4, 0<span class="o">)</span>
+            sstore<span class="o">(</span>0, 0<span class="o">)</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="task--03">Task -03</h2>
+
+<p>Recruiter asked me <code class="language-plaintext highlighter-rouge">can you provide an example of code that is normally safe, but becomes unsafe after a compiler optimization pass?</code>.</p>
+
+<p><strong>Initial Thoughts</strong></p>
+
+<ul>
+  <li>
+    <p>Normally since solidity follows the memory rules ,optimization over that code won’t cause any issues .</p>
+  </li>
+  <li>
+    <p>Instead assembly gives a good flexibility for developers over opcodes and memory operations ,so by default optimizer consider it as memory unsafe and won’t do any optimizations.</p>
+  </li>
+  <li>
+    <p>But if the developer specify explicitly using <code class="language-plaintext highlighter-rouge">memory-safe</code> annotation , the compiler simply assumes it as memory safe and do optimizations but the compiler cannot confirm or validate its memory safety.</p>
+  </li>
+  <li>
+    <p>so if the memory unsafe assembly is specified as memory safe , the optimizations which moves the values from stack to memory to avoid <code class="language-plaintext highlighter-rouge">stack deep error</code> might result in delivering improper values to the variables which result in undefined behaviour.</p>
+  </li>
+  <li>
+    <p>But the optimizer moves the stack variables to the memory only if it encounters a <code class="language-plaintext highlighter-rouge">stack too deep error</code> in the code . So a normally safe code with stack too deep error <code class="language-plaintext highlighter-rouge">won’t compile</code> without a optimizer to becomes a unsafe after the optimization pass.</p>
+  </li>
+</ul>
+
+<p>I told him that It is not possible to give such example. But he gave me a hint that it is possible .</p>
+
+<h3 id="building-example-">Building Example :</h3>
+
+<h5 id="after-going-through-all-the-optimization-passes-here-is-a-brief-summary-of-what-happens-in-each-pass">After going through all the optimization passes ,Here is a brief summary of what happens in each pass:</h5>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">DeadAssignmentEliminator</code>: This pass eliminates unnecessary assignments to variables that are never read from again. This reduces the amount of unnecessary code in the program.</li>
+  <li><code class="language-plaintext highlighter-rouge">FullInliner</code>: This pass inlines small functions into the call site to reduce the overhead of function calls.</li>
+  <li><code class="language-plaintext highlighter-rouge">JumpCleaner</code>: This pass removes unnecessary jump instructions in the code.</li>
+  <li><code class="language-plaintext highlighter-rouge">UnusedFunctionRemover</code>: This pass removes unused functions from the code. This reduces the size of the program.</li>
+  <li><code class="language-plaintext highlighter-rouge">UnusedVariableRemover</code>: This pass removes unused variables from the code. This reduces the size of the program.</li>
+  <li><code class="language-plaintext highlighter-rouge">BlockSimplifier</code>: This pass simplifies blocks of code that can be reduced to a single instruction.</li>
+  <li><code class="language-plaintext highlighter-rouge">StackHeightOptimizer</code>: This pass replaces duplicate stack operations with a single instruction. This reduces the amount of stack usage.</li>
+  <li><code class="language-plaintext highlighter-rouge">ConstantFolder</code>: This pass evaluates constant expressions at compile time and replaces them with their values. This reduces the number of instructions executed at runtime.</li>
+  <li><code class="language-plaintext highlighter-rouge">VariableReplacer</code>: This pass replaces local variables with their values when possible. This reduces the number of memory accesses and improves performance.</li>
+  <li><code class="language-plaintext highlighter-rouge">StackLimitEvader</code>: This pass optimizes the use of the EVM stack by moving variables to memory when necessary. This reduces the risk of running out of stack space during execution.</li>
+</ol>
+
+<p>Our requirement for Example :</p>
+
+<ol>
+  <li>produces a result that is not a compilation error when run normally</li>
+  <li>produces a different result when optimized</li>
+</ol>
+
+<h3 id="solution-">Solution :</h3>
+
+<p>We should write a code which should increase the stack size while doing the optimization ,so that it can trigger the <code class="language-plaintext highlighter-rouge">StackLimitEvader</code> pass to overwrite the values in the memory.</p>
+
+<p>But the actual question here is which optimization pass can do this , as you can see the above passes you may have already got the answer ,Yes.. <a href="https://docs.soliditylang.org/en/latest/internals/optimizer.html#fullinliner">FullInliner</a>.</p>
+
+<p>The flow look like this :
+<img src="https://file.notion.so/f/s/eb4e1ba3-a424-46cc-a822-157d7e14d31c/Untitled_drawing.jpg?id=ead7bb32-8fbc-4fb0-8f52-9e956dfc6882&amp;table=block&amp;spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&amp;expirationTimestamp=1690596000000&amp;signature=yeMo74ragAVuMdGETTbw3l2mEPhL189XyRGUiJMPJaU&amp;downloadName=Untitled+drawing.jpg" alt="Flow" /></p>
+
+<p>Code :</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SPDX-License-Identifier: MIT</span>
+<span class="nx">pragma</span> <span class="nx">solidity</span> <span class="o">^</span><span class="mf">0.8</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+<span class="nx">contract</span> <span class="nx">Exp5</span> <span class="p">{</span>
+    <span class="nx">uint256</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kd">function</span> <span class="nx">stackTooDeep</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">view</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint256</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">uint256</span> <span class="nx">_a</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_b</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_c</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_d</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_e</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_f</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_g</span><span class="p">;</span>
+        <span class="nx">uint256</span> <span class="nx">_h</span><span class="p">;</span>
+        <span class="nx">assembly</span> <span class="p">(</span><span class="dl">"</span><span class="s2">memory-safe</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="kd">function</span> <span class="nx">f_a</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">b</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">a1</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">sub</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="kd">let</span> <span class="nx">x</span> <span class="p">:</span><span class="o">=</span> <span class="nx">mload</span><span class="p">(</span><span class="nx">a1</span><span class="p">)</span>
+                <span class="kd">let</span> <span class="nx">b2</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="nx">b</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">b2</span><span class="p">)</span>
+                <span class="nx">b</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
+                <span class="nx">b</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">b</span><span class="p">))</span>
+            <span class="p">}</span>
+
+            <span class="nl">_a</span> <span class="p">:</span><span class="o">=</span> <span class="nx">f_a</span><span class="p">(</span><span class="nx">sload</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="nx">_b</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="nx">_c</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="nx">_d</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+            <span class="nx">_e</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+            <span class="nx">_f</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="nx">_g</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="nx">_h</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">f_a</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="nx">f_a</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+            <span class="nx">mstore</span><span class="p">(</span><span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">uint256</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nx">memory</span> <span class="nx">sum</span><span class="p">;</span>
+        <span class="nx">sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_a</span> <span class="o">+</span> <span class="nx">_b</span> <span class="o">+</span> <span class="nx">_c</span> <span class="o">+</span> <span class="nx">_d</span> <span class="o">+</span> <span class="nx">_e</span> <span class="o">+</span> <span class="nx">_f</span> <span class="o">+</span> <span class="nx">_g</span> <span class="o">+</span> <span class="nx">_h</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">sum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Optimized code snippet storing values in memory :</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">_2</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="cm">/** @src 0:92:1365  "contract Exp5 {..." */</span> <span class="nx">_1</span><span class="p">)</span>
+<span class="c1">/// @src 0:602:1247  "assembly (\"memory-safe\") {..."</span>
+<span class="nx">mstore</span><span class="p">(</span><span class="mh">0xc0</span><span class="p">,</span> <span class="nx">mload</span><span class="p">(</span><span class="nx">sload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">_2</span><span class="p">,</span> <span class="nx">not</span><span class="p">(</span><span class="mi">0</span><span class="p">)))))</span>
+<span class="kd">let</span> <span class="nx">usr$b</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">sload</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="nx">_2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="nx">mstore</span><span class="p">(</span><span class="mh">0xa0</span><span class="p">,</span> <span class="nx">add</span><span class="p">(</span><span class="nx">usr$b</span><span class="p">,</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">mload</span><span class="p">(</span><span class="mh">0xc0</span><span class="p">))))</span>
+<span class="nx">mstore</span><span class="p">(</span><span class="mh">0x80</span><span class="p">,</span> <span class="nx">mload</span><span class="p">(</span><span class="nx">sload</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="kd">let</span> <span class="nx">_3</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">usr$b_1</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">_3</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">usr$b_2</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">usr$b_1</span><span class="p">,</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">mload</span><span class="p">(</span><span class="mh">0x80</span><span class="p">)))</span>
+<span class="nx">mstore</span><span class="p">(</span><span class="mh">0x01a0</span><span class="p">,</span> <span class="nx">mload</span><span class="p">(</span><span class="nx">_2</span><span class="p">))</span>
+<span class="kd">let</span> <span class="nx">_4</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">usr$b_3</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">_4</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">usr$b_4</span> <span class="p">:</span><span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="nx">usr$b_3</span><span class="p">,</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">mload</span><span class="p">(</span><span class="mh">0x01a0</span><span class="p">)))</span>
+<span class="kd">let</span> <span class="nx">usr$x</span> <span class="p">:</span><span class="o">=</span> <span class="nx">mload</span><span class="p">(</span><span class="nx">_4</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">_5</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="cm">/** @src 0:92:1365  "contract Exp5 {..." */</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1">/// @src 0:602:1247  "assembly (\"memory-safe\") {..."</span>
+<span class="kd">let</span> <span class="nx">usr$b_5</span> <span class="p">:</span><span class="o">=</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">_5</span><span class="p">)</span>
+<span class="nx">mstore</span><span class="p">(</span><span class="mh">0x0140</span><span class="p">,</span> <span class="nx">add</span><span class="p">(</span><span class="nx">usr$b_5</span><span class="p">,</span> <span class="nx">sload</span><span class="p">(</span><span class="nx">usr$x</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>After this step the free memory pointer is updated by the optimizer and we again updating it in our code</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nx">mstore</span><span class="p">(</span><span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">)</span> <span class="c1">// This will update the fmp</span>
+        <span class="p">}</span>
+        <span class="nx">uint256</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nx">memory</span> <span class="nx">sum</span><span class="p">;</span> <span class="c1">// This will override the values stored in the fmp and fmp + 0x20 as it is 2 length array</span>
+<span class="c1">//Returns different Value</span>
+</code></pre></div></div>
+
+<p>This is achieved by manipulating the stack size during optimization, triggering the StackLimitEvader to overwrite values in memory, leading to a different result when optimized.</p>
+
+<p><strong>Output</strong></p>
+
+<p><img src="https://file.notion.so/f/s/6e88223a-9cd3-4a44-875b-0f82e16a8ee2/photo_6300695497312154375_x.jpg?id=53a09889-48dd-4b27-acdb-b24fd1b56773&amp;table=block&amp;spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&amp;expirationTimestamp=1690596000000&amp;signature=GkjC84J2qf4K6eQ2S2hFnxSfaivzC8FHIl2rZbwja3Y&amp;downloadName=photo_6300695497312154375_x.jpg" alt="Output" /></p>
+
+<h2 id="what-i-learned">What I learned</h2>
+
+<p>Through these tasks, I have not only learned the YUL language but also delved deep into the internals of YUL Optimization and memory-safety. This exploration helped me to gain a better understanding of the EVM .</p>
+
+<h2 id="sources">Sources</h2>
+
+<ul>
+  <li><a href="https://docs.soliditylang.org/en/latest/yul.html#memoryguard">Yul Docs</a></li>
+  <li><a href="https://blog.soliditylang.org/2021/11/09/solidity-0.8.10-release-announcement/">Solidity_Blog</a></li>
+  <li><a href="https://github.com/ethereum/solidity/blob/29751849b58a7db5eec3f297087544ae9531f0df/libyul/optimiser/StackLimitEvader.cpp">StackLimitEvader</a></li>
+  <li><a href="https://docs.soliditylang.org/en/latest/internals/optimizer.html#fullinliner">FullInliner</a>.</li>
+</ul>
+
+</article>
+
+        </div>
+        <div class="col-sm-2">
+          <div class="pane-separator hidden-xs" style="margin-bottom:30em;"></div>
+          <div class="pane-separator visible-xs" style="margin-bottom:5em;"></div>
+          <div class="right-pane" style="margin-left: 1em;">
+            
+              <div class="avatar">
+                <center>
+                  
+                    <img src="/potato-hacker-theme/assets/img/avatar.jpg" alt="me" class="avatar-image">
+                  
+                  
+                    <p class="avatar-description">Building n Breaking Stuff</p>
+                  
+                  <div class="right-links">
+                    
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+                  </div>
+                </center>
+              </div>
+            
+            
+              <div class="posts-list">
+                <a href="/potato-hacker-theme/blog">
+                  <h4>Recent Posts:</h4>
+                </a>
+                <ul>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <footer class="page-footer">
+  <center>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <a onclick="toggleTheme();">
+          Light/Dark
+        </a>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        
+<a href="https://github.com/D4r3-D3v1L" target="_blank">
+	<i class="fa fa-github fa-2x"></i>
+</a>
+ 
+<a href="mailto:d4r3d3v1l.asp@gmail.com">
+	<i class="fa fa-envelope fa-2x"></i>
+</a>
+ 
+<a href="https://twitter.com/D4r3_D3v1L_" target="_blank">
+	<i class="fa fa-twitter fa-2x"></i>
+</a>
+ 
+<a href="https://www.linkedin.com/in/surya-prakash-akula-44bbb5190" target="_blank">
+	<i class="fa fa-linkedin fa-2x"></i>
+</a>
+
+
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        Copyright (c) 2023 Surya -
+        <a href="mailto:d4r3d3v1l.asp@gmail.com">&lt;d4r3d3v1l.asp@gmail.com&gt;</a>
+      </div>
+    </div>
+    
+  </center>
+</footer>
+
+    </section>
+  </div>
+</body>
+
+</html>

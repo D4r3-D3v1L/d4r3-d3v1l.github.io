@@ -5,7 +5,7 @@ date: 2023-07-25 09:07:16
 categories: blog
 ---
 
-This is the first task,Need to solve some of the challenges in Paradigm CTF 2022.
+This is the first task,Where I need to solve some of the challenges in Paradigm CTF 2022.
 
 <!--more-->
 
