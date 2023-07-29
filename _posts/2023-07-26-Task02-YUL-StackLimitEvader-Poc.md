@@ -5,11 +5,11 @@ date: 2023-07-26 08:07:34
 categories: blog
 ---
 
-This is the second task which consists of YUL language , Optimization Passes and memory-safe assembly in solidity.
+This is the second task of the interview process which consists of YUL language , Optimization Passes and memory-safe assembly in solidity.
 
 <!--more-->
 
-After the First task , the recruiter gave me a week to learn YUL language which is intermediate language for EVM.
+After the [First task](https://d4r3-d3v1l.github.io/blog/2023/07/25/Task01-Paradigm.html) , the recruiter gave me a week to learn YUL language which is intermediate language for EVM.
 
 I have refered these resources [YUL basics ](https://calnix.gitbook.io/eth-dev/yul/yul),[YUL Documentation](https://docs.soliditylang.org/en/latest/yul.html) .
 

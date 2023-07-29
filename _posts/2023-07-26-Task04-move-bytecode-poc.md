@@ -5,7 +5,9 @@ date: 2023-07-26 09:27:43
 categories: blog
 ---
 
-This is the last task which is writing a poc for a bug in move compiler code by reverting the patch.
+This is the last task of the interview process which is writing a poc for a bug in move compiler code by reverting the patch.
+
+You can find the previous tasks here : [Task 2,3](https://d4r3-d3v1l.github.io/blog/2023/07/26/Task02-YUL-StackLimitEvader-Poc.html) [Task 1](https://d4r3-d3v1l.github.io/blog/2023/07/25/Task01-Paradigm.html)
 
 <!--more-->
 
