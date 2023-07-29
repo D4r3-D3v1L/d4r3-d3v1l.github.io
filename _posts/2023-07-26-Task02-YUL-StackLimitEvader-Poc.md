@@ -29,7 +29,7 @@ If you want to skip the code flow of How StackLimitEvader pass works Please clic
 
 [code](https://github.com/ethereum/solidity/blob/29751849b58a7db5eec3f297087544ae9531f0df/libyul/optimiser/StackLimitEvader.cpp)
 
-![Flow](https://file.notion.so/f/s/e294a517-c867-47c1-87b7-702addc6b695/Untitled.png?id=fa89efdb-8e6f-4cb3-9584-f7fe1dce360e&table=block&spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&expirationTimestamp=1690588800000&signature=7H5-vyw6SrLu-mJvHD_Bz6rwiBq-No_OIjDKPvzRGJ4&downloadName=Untitled.png)
+![Flow](https://cdn.discordapp.com/attachments/695225455388917773/1134948436928626688/evader_flow.png)
 
 `Suite.cpp` file which executes various optimization steps, including the `StackLimitEvader` technique. The `StackLimitEvader::run` function is called, which in turn calls two other `run` functions in the `StackLimitEvader.cpp` file.
 
@@ -416,7 +416,7 @@ We should write a code which should increase the stack size while doing the opti
 But the actual question here is which optimization pass can do this , as you can see the above passes you may have already got the answer ,Yes.. [FullInliner](https://docs.soliditylang.org/en/latest/internals/optimizer.html#fullinliner).
 
 The flow look like this :
-![Flow](https://file.notion.so/f/s/eb4e1ba3-a424-46cc-a822-157d7e14d31c/Untitled_drawing.jpg?id=ead7bb32-8fbc-4fb0-8f52-9e956dfc6882&table=block&spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&expirationTimestamp=1690596000000&signature=yeMo74ragAVuMdGETTbw3l2mEPhL189XyRGUiJMPJaU&downloadName=Untitled+drawing.jpg)
+![Flow](https://cdn.discordapp.com/attachments/695225455388917773/1134949091974066296/flow_poc.jpg)
 
 Code :
 
@@ -500,7 +500,7 @@ This is achieved by manipulating the stack size during optimization, triggering 
 
 **Output**
 
-![Output](https://file.notion.so/f/s/6e88223a-9cd3-4a44-875b-0f82e16a8ee2/photo_6300695497312154375_x.jpg?id=53a09889-48dd-4b27-acdb-b24fd1b56773&table=block&spaceId=ab48cbd9-e93c-449f-912e-ad13ad550a0e&expirationTimestamp=1690596000000&signature=GkjC84J2qf4K6eQ2S2hFnxSfaivzC8FHIl2rZbwja3Y&downloadName=photo_6300695497312154375_x.jpg)
+![Output](https://cdn.discordapp.com/attachments/695225455388917773/1134949130305818635/output_poc.jpg)
 
 ## What I learned
 
