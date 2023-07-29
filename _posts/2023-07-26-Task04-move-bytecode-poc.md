@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Poc for VecPack bug in Move Compiler Task[04]"
+title: "Poc for a bug in move-bytecode-verifier Task[04]"
 date: 2023-07-26 09:27:43
 categories: blog
 ---
