@@ -16,7 +16,7 @@
 title: jekyll-theme-potato-hacker
 author: "Surya"
 email: "d4r3d3v1l.asp@gmail.com"
-description: Building n Breaking
+description:
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
