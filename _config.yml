@@ -39,7 +39,7 @@ theme_switch: on # Show color switch (on | off)
 blog: on # Show blog tag and post list (on | off)
 avatar: on # Show avatar (on | off)
 avatar_image: "assets/img/avatar.jpg"
-avatar_description: "Building n Breaking Stuff"
+avatar_description: ""
 highlighter_theme:
     gruvbox # Theme of the syntax_highlighter [base16 |
     # colorful | github | gruvbox | molokai |
