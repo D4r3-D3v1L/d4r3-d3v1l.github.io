@@ -9,7 +9,9 @@ Hi guys, I recently applied to a junior auditor role in a Blockchain Security co
 
 This is the first task,Where I need to solve some of the challenges in Paradigm CTF 2022.
 
-You can find the other tasks here : [Task 2,3](https://d4r3-d3v1l.github.io/blog/2023/07/26/Task02-YUL-StackLimitEvader-Poc.html) [Task 4](https://d4r3-d3v1l.github.io/blog/2023/07/26/Task04-move-bytecode-poc.html)
+#### You can read the other tasks here :  
+- ### [Task 2,3](https://d4r3-d3v1l.github.io/blog/2023/07/26/Task02-YUL-StackLimitEvader-Poc.html)
+- ### [Task 4](https://d4r3-d3v1l.github.io/blog/2023/07/26/Task04-move-bytecode-poc.html)
 
 <!--more-->
 
