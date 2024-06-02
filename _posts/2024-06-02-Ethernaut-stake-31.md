@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ethernaut CTF WriteUp Stake 31 "
-date: 2024-06-2 13:07:12
+date: 2024-06-01 13:07:12
 categories: blog
 ---
 
